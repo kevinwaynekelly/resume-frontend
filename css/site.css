@@ -34,7 +34,7 @@ body {
 	margin: 0;
 	padding: 0;
 	color: var(--text-color);
-	background-color: var(--background-color); /* was header-bg; use page bg */
+    background-color: var(--header-bg);
 	line-height: 1.4;
 	font-size: 100%;
 	transition: background-color var(--transition-duration), color var(--transition-duration);
