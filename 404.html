@@ -1,20 +1,32 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Page not found</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body { font-family: system-ui, sans-serif; display:grid; place-items:center; min-height:100vh; margin:0; }
-    .card { text-align:center; padding:2rem; border:1px solid #e5e7eb; border-radius:12px; }
-    a { display:inline-block; margin-top:1rem; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found</title>
+
+  <!-- Link your existing CSS (adjust path if needed) -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Font Awesome (for icons if your site uses them) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-K5m0HZykN0G7o3Rmnf4FQm0b6yJdLhMqP9gE1ovNcQZrMZpOq1yX3F9XjoJxC7Xh9km4NvWf6i5G2L7U3s9xkg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-  <div class="card">
-    <h1>404 — Not Found</h1>
-    <p>Sorry, that page doesn’t exist.</p>
-    <a href="/">Go home</a>
+  <div class="container">
+    <section class="card">
+      <h1>🚧 404 — Page Not Found</h1>
+      <p>The page you’re looking for doesn’t exist.</p>
+      <a href="/" class="btn"><i class="fas fa-home"></i> Return Home</a>
+    </section>
   </div>
+
+  <!-- Dark/Light Mode Support (reuses your toggle logic) -->
+  <script>
+    // Reuse theme from localStorage if it exists
+    const currentTheme = localStorage.getItem("theme");
+    if (currentTheme === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+  </script>
 </body>
 </html>
