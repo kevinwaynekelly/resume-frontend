@@ -437,6 +437,9 @@
 				width: 0.85em; /* Ensure fixed-width icons have a uniform width */
 			}
         }
+		#api-demo .api-card input, #api-demo .api-card select, #api-demo .api-card button {
+		  font-size: 1rem; padding: .6rem; border: 1px solid #d1d5db; border-radius: 8px;
+		}
     </style>
 </head>
 <body>
@@ -454,6 +457,33 @@
                 <p><a href="https://drive.google.com/file/d/1faYerKmWyI8Eoqr0KWyKHTJrBnSuG9i8/view" target="_blank" rel="noopener noreferrer" aria-label="View Kevin's Resume"><i class="fas fa-file-pdf"></i></a></p>
             </nav>
         </header>
+		<section id="api-demo">
+		  <h2><i class="fas fa-wand-magic-sparkles"></i> API Demo</h2>
+		
+		  <div class="api-card" style="display:grid;gap:12px;">
+		    <label>
+		      <span>Your text</span>
+		      <input id="demo-text" placeholder="Type something..." />
+		    </label>
+		
+		    <label>
+		      <span>Mode</span>
+		      <select id="demo-mode">
+		        <option value="uppercase">Uppercase</option>
+		        <option value="reverse">Reverse</option>
+		        <option value="sparkles">Sparkles ✨</option>
+		        <option value="snake">snake_case</option>
+		      </select>
+		    </label>
+		
+		    <button id="demo-send" style="padding:.6rem 1rem;cursor:pointer;">Send to API</button>
+		
+		    <div>
+		      <strong>Result</strong>
+		      <pre id="demo-out" style="background:#0b1020;color:#e5e7eb;padding:12px;border-radius:8px;overflow:auto;margin:0;">—</pre>
+		    </div>
+		  </div>
+		</section>
         <main>
 			<section id="professional-summary">
 			    <h2><i class="fas fa-user"></i> Professional Summary</h2>
@@ -711,6 +741,40 @@
 	  document.addEventListener("DOMContentLoaded", () => {
 	    const year = new Date().getFullYear();
 	    document.getElementById("copyright-year").textContent = year;
+	  });
+	</script>
+	<script>
+	  const API_URL = "https://api.kevinwaynekelly.com";
+	
+	  const $ = (id) => document.getElementById(id);
+	  const textEl = $("demo-text");
+	  const modeEl = $("demo-mode");
+	  const outEl  = $("demo-out");
+	
+	  $("demo-send").addEventListener("click", async () => {
+	    const text = (textEl.value || "").trim();
+	    const mode = modeEl.value;
+	    if (!text) {
+	      outEl.textContent = "Please enter some text first.";
+	      return;
+	    }
+	    outEl.textContent = "Working...";
+	
+	    try {
+	      const res = await fetch(API_URL, {
+	        method: "POST",
+	        headers: { "Content-Type": "application/json" },
+	        body: JSON.stringify({ text, mode })
+	      });
+	      const json = await res.json().catch(() => ({}));
+	      if (res.ok && json.ok) {
+	        outEl.textContent = `Mode: ${json.mode}\nTransformed: ${json.transformed}`;
+	      } else {
+	        outEl.textContent = json.error || "Error from API.";
+	      }
+	    } catch (e) {
+	      outEl.textContent = "Network error.";
+	    }
 	  });
 	</script>
 </body>
