@@ -1,0 +1,30 @@
+name: Build LaTeX -> PDF
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'tex/**.tex'
+      - '.github/workflows/build-resume.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      # Compile with full LaTeX engine (fast & reliable)
+      - uses: xu-cheng/latex-action@v3
+        with:
+          root_file: resume.tex
+          working_directory: tex
+          latexmk_use_lualatex: true
+          # prevents network / shell escapes
+          extra_latexmk_flags: -halt-on-error -file-line-error
+
+      # Move PDF into docs/ so Pages serves it
+      - name: Move PDF to docs/
+        run: |
+          mkdir -p docs
+          mv tex/resume.pdf docs/resume.pdf

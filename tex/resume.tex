@@ -1,0 +1,170 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\usepackage{CormorantGaramond}
+\usepackage{charter}
+
+\setlength{\footskip}{4.1pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \scshape\large\raggedright
+}{}{0em}{}[\color{black}\titlerule]
+
+\pdfgentounicode=1
+
+\newcommand{\resumeItem}[1]{\item\small{#1 \vspace{-2pt}}}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeSubSubheading}[2]{
+  \item
+  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \textit{\small#1} & \textit{\small #2} \\
+  \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeProjectHeading}[3]{
+  \item
+  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3}
+  \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge \scshape Kevin Kelly} \\ \vspace{1pt}
+    San Antonio, Texas, United States $|$ \href{mailto:kevinwaynekelly@gmail.com}{kevinwaynekelly@gmail.com} $|$
+    \href{https://resume.kevinwaynekelly.com}{resume.kevinwaynekelly.com}
+\end{center}
+
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {The University of Texas at Austin}{Aug. 2019 to May 2023}
+      {Bachelor of Science in Electrical Engineering, Emphasis in Software Engineering and Design}{Austin, TX}
+      \resumeItemListStart
+        \resumeItem{Applied software engineering and design principles to embedded systems, hardware design, and computer engineering projects.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+\section{Projects}
+  \resumeSubHeadingListStart
+
+    \resumeProjectHeading
+        {Formal Circuit Verification Algorithm}{}
+        {Sponsored by Cadence Design Systems Inc.}
+        \resumeItemListStart
+          \resumeItem{Built a C++ tool with Tarjan’s SCC to detect cycle risk in RTL and ASIC netlists, enabling formal verification.}
+          \resumeItem{Benchmarked alternatives and removed runtime bottlenecks, improving scalability in timing-critical netlists.}
+        \resumeItemListEnd
+
+    \resumeProjectHeading
+        {Website Data Management and Deployment}{}
+        {Software Keystone}
+        \resumeItemListStart
+          \resumeItem{Led full-stack deployment of a project management platform with React, Node.js, MongoDB, Heroku, Python, and SQL.}
+          \resumeItem{Built authenticated REST APIs for secure, efficient data flow across distributed components, reducing user friction.}
+          \resumeItem{Designed database schemas and backend logic for high-volume transactions, preventing data loss and contention.}
+        \resumeItemListEnd
+
+    \resumeProjectHeading
+        {ARM Based USB Game Controller}{}
+        {Hardware Keystone}
+        \resumeItemListStart
+          \resumeItem{Designed and brought up an ARM Cortex-M USB controller with dual joysticks and 12 buttons, from schematic to PCB, demonstrating SoC integration, embedded systems design, and hardware–software debugging.}
+          \resumeItem{Wrote embedded C with memory-mapped I/O for deterministic control and seamless hardware–software integration.}
+          \resumeItem{Validated USB HID via iterative bring up and targeted debug, yielding stable, repeatable behavior.}
+        \resumeItemListEnd
+
+    \resumeProjectHeading
+        {Real Time Facial Expression Recognition}{}
+        {Digital Image Processing and Machine Learning}
+        \resumeItemListStart
+          \resumeItem{Built a real time Python and OpenCV pipeline with Haar cascades to classify emotions in live video.}
+          \resumeItem{Linked detections to smart home triggers via IoT, demonstrating end-to-end computer vision to device control.}
+        \resumeItemListEnd
+
+    \resumeProjectHeading
+        {Unraid Home Server Deployment}{}
+        {Personal Project}
+        \resumeItemListStart
+          \resumeItem{Built and maintain an Unraid server with Dockerized microservices and CI/CD pipelines for media, automation, and monitoring.}
+          \resumeItem{Configured parity-protected arrays and backups to safeguard data and speed recovery, applying system administration, virtualization, VLAN, and VPN best practices.}
+          \resumeItem{Improved security and performance with DNS caching, reverse proxies (NGINX/Traefik), and VPN tunneling.}
+          \resumeItem{Maintain Linux VMs and containers to practice orchestration and resource isolation.}
+        \resumeItemListEnd
+
+    \resumeProjectHeading
+        {Professional Portfolio Website}{}
+        {Personal Project}
+        \resumeItemListStart
+          \resumeItem{Built and maintain a responsive, mobile-friendly portfolio highlighting projects and experience.}
+          \resumeItem{Implemented CSS grid and flex layouts, plus dark mode for usability.}
+          \resumeItem{Integrated OpenGraph and Twitter meta tags with SEO keywords to improve discoverability and sharing.}
+          \resumeItem{Hosted on a custom domain with HTTPS for secure, dependable access.}
+        \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Audio Video Assistant, Operator, Supervisor}{Sep 2019 to Aug 2023}
+      {The University of Texas at Austin}{Austin, TX}
+      \resumeItemListStart
+        \resumeItem{Directed a 15+ technician team and trained hires on complex AV systems, networking, and real-time event operations, reducing errors in large-scale university events.}
+        \resumeItem{Served as liaison for clients, performers, and university leadership, turning requirements into clear runbooks under pressure.}
+        \resumeItem{Resolved technical and logistical issues in real time to ensure continuity and client success.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \item {\small
+    \textbf{Programming}{: Python, Java, C, C++, C\#, JavaScript, SQL, Lua, ARM Assembly, x86 Assembly, HTML5/CSS} \\
+    \textbf{Hardware / Systems}{: Verilog, RTL (Register Transfer Level) Design, Digital Logic, Formal Verification, PCB Design, Embedded Systems, SoC (System-on-Chip) Integration, System Architecture, Linux, Operating Systems, Docker, Virtualization, VLAN, VPN} \\
+    \textbf{Frameworks / Tools}{: React.js, Node.js, REST APIs, OAuth, OpenCV, IoT, AWS, Git, MongoDB, PostgreSQL, Redis, CI/CD Pipelines, Unit Testing (JUnit, PyTest), Selenium, Reverse Proxies (NGINX/Traefik), TCP/IP, DNS, DHCP, RTSP, HTTP/HTTPS, SSL/TLS Certificates, Firewalls}}
+ \end{itemize}
+
+\end{document}
