@@ -76,6 +76,7 @@
 			</label>
 			<button id="demo-send">Send to API</button>
 		  </div>
+		  <div class="result" id="demo-encrypted">—</div>
 		  <div class="result" id="demo-out">—</div>
 		</section>
 		<section id="education">
@@ -343,6 +344,7 @@
 	  const modeEl = $("demo-mode");
 	  const outEl  = $("demo-out");
 	  const btn    = $("demo-send");
+	  const encEl  = $("demo-encrypted"); // <- new box to show ciphertext
 
 	  // ====== Crypto helpers ======
 	  let cachedPublicKey = null;
@@ -391,6 +393,15 @@
 		return toBase64url(new Uint8Array(ct));
 	  }
 
+	  // Small helper to make long strings readable
+	  function formatCiphertext(str) {
+		const preview = str.length > 160 ? str.slice(0,160) + "… (" + str.length + " chars)" : str;
+		return preview;
+	  }
+	  async function copy(text) {
+		try { await navigator.clipboard.writeText(text); return true; } catch { return false; }
+	  }
+
 	  // ====== UI wiring ======
 	  btn.addEventListener("click", async () => {
 		const text = (textEl.value || "").trim();
@@ -399,12 +410,30 @@
 
 		btn.disabled = true;
 		outEl.textContent = "Working…";
+		encEl.textContent = "Encrypting…";
 
 		try {
 		  // Encrypt on the client
 		  const ciphertext = await encryptPayload({ text, mode });
 
-		  // Send encrypted blob expected by your Worker
+		  // Show the exact encrypted payload being sent
+		  encEl.innerHTML = `
+			<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+			  <strong>Encrypted payload (base64url):</strong>
+			  <button id="copy-ct" style="padding:.35rem .6rem;border:none;border-radius:8px;cursor:pointer;background:var(--primary-color);color:#fff;">
+				Copy
+			  </button>
+			</div>
+			<div style="margin-top:8px;word-break:break-all;font-size:.95em;">${formatCiphertext(ciphertext)}</div>
+		  `;
+		  // Copy handler
+		  $("copy-ct")?.addEventListener("click", async () => {
+			const ok = await copy(ciphertext);
+			$("copy-ct").textContent = ok ? "Copied!" : "Copy failed";
+			setTimeout(() => ($("copy-ct").textContent = "Copy"), 1200);
+		  });
+
+		  // Send encrypted blob to your Worker
 		  const res = await fetch(API_URL, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -419,6 +448,7 @@
 		  }
 		} catch (err) {
 		  console.error(err);
+		  encEl.textContent = "Encryption failed.";
 		  outEl.textContent = "Encryption or network error.";
 		} finally {
 		  btn.disabled = false;
