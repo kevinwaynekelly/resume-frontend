@@ -326,33 +326,99 @@
     document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("copyright-year").textContent = new Date().getFullYear();
     });
+	</script>
+	<script>
+	  // ====== Config ======
+	  const API_URL = "https://api.kevinwaynekelly.com";
+	  const PUBLIC_KEY_URL = "/keys/public.pem"; // serve your SPKI public key here
 
-    // API Demo
-    const API_URL = "https://api.kevinwaynekelly.com";
-    const $ = (id) => document.getElementById(id);
-    const textEl = $("demo-text"), modeEl = $("demo-mode"), outEl = $("demo-out"), btn = $("demo-send");
-    btn.addEventListener("click", async () => {
-      const text = (textEl.value || "").trim();
-      const mode = modeEl.value;
-      if (!text) { outEl.textContent = "Please enter some text."; return; }
-      btn.disabled = true;
-      outEl.textContent = "Working…";
-      try {
-        const res = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, mode })
-        });
-        const json = await res.json().catch(() => ({}));
-        outEl.innerHTML = (res.ok && json.ok)
-          ? `Mode: ${json.mode}<br>Transformed: ${json.transformed}`
-          : (json.error || "Error from API.");
-      } catch {
-        outEl.textContent = "Network error.";
-      } finally {
-        btn.disabled = false;
-      }
-    });
-  </script>
+	  // ====== DOM helpers ======
+	  const $ = (id) => document.getElementById(id);
+	  const textEl = $("demo-text");
+	  const modeEl = $("demo-mode");
+	  const outEl  = $("demo-out");
+	  const btn    = $("demo-send");
+
+	  // ====== Crypto helpers ======
+	  let cachedPublicKey = null;
+
+	  async function fetchPublicKeyPem() {
+		const res = await fetch(PUBLIC_KEY_URL, { cache: "reload" });
+		if (!res.ok) throw new Error("Failed to fetch public key");
+		return await res.text();
+	  }
+
+	  function pemToArrayBuffer(pem, begin, end) {
+		const lines = pem.trim().split(/\r?\n/);
+		const b = lines.indexOf(begin);
+		const e = lines.indexOf(end);
+		if (b === -1 || e === -1 || e <= b + 1) throw new Error("Bad PEM format");
+		const base64 = lines.slice(b + 1, e).join("");
+		const bin = atob(base64);
+		const bytes = new Uint8Array(bin.length);
+		for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+		return bytes.buffer;
+	  }
+
+	  async function importPublicKeyFromPem(pemText) {
+		const spki = pemToArrayBuffer(pemText, "-----BEGIN PUBLIC KEY-----", "-----END PUBLIC KEY-----");
+		return crypto.subtle.importKey(
+		  "spki",
+		  spki,
+		  { name: "RSA-OAEP", hash: "SHA-256" },
+		  false,
+		  ["encrypt"]
+		);
+	  }
+
+	  function toBase64url(bytes) {
+		const b64 = btoa(String.fromCharCode(...bytes));
+		return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/,"");
+	  }
+
+	  async function encryptPayload(obj) {
+		if (!cachedPublicKey) {
+		  const pem = await fetchPublicKeyPem();
+		  cachedPublicKey = await importPublicKeyFromPem(pem);
+		}
+		const data = new TextEncoder().encode(JSON.stringify(obj));
+		const ct = await crypto.subtle.encrypt({ name: "RSA-OAEP" }, cachedPublicKey, data);
+		return toBase64url(new Uint8Array(ct));
+	  }
+
+	  // ====== UI wiring ======
+	  btn.addEventListener("click", async () => {
+		const text = (textEl.value || "").trim();
+		const mode = modeEl.value;
+		if (!text) { outEl.textContent = "Please enter some text."; return; }
+
+		btn.disabled = true;
+		outEl.textContent = "Working…";
+
+		try {
+		  // Encrypt on the client
+		  const ciphertext = await encryptPayload({ text, mode });
+
+		  // Send encrypted blob expected by your Worker
+		  const res = await fetch(API_URL, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ ciphertext })
+		  });
+
+		  const json = await res.json().catch(() => ({}));
+		  if (res.ok && json.ok) {
+			outEl.innerHTML = `Mode: ${json.mode}<br>Transformed: ${json.transformed}`;
+		  } else {
+			outEl.textContent = json.error || "Error from API.";
+		  }
+		} catch (err) {
+		  console.error(err);
+		  outEl.textContent = "Encryption or network error.";
+		} finally {
+		  btn.disabled = false;
+		}
+	  });
+	</script>
 </body>
 </html>
