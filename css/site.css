@@ -517,3 +517,13 @@ body {
 .dark-mode h1 {
   color: #ffffff;                      /* force light title text */
 }
+
+/* prevent theme toggle layout jank */
+header a,
+nav a { border: 1px solid transparent; box-sizing: border-box; }
+.dark-mode header a,
+.dark-mode nav a { border-color: var(--border-color); }
+
+nav a { width: 30px; height: 30px; box-sizing: border-box; }
+#theme-toggle { white-space: nowrap; }
+html { scrollbar-gutter: stable; }
