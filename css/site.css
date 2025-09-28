@@ -11,8 +11,8 @@
 	--max-width: 1200px;
 	--container-padding: 15px;
 	--transition-duration: 0.3s;
-	--header-bg: #003366;
-	--header-title: #ffffff;
+	--header-bg: #003366;     /* header background */
+	--header-title: #ffffff;  /* header title color */
 }
 
 .dark-mode {
@@ -25,8 +25,8 @@
 	--header-link-color: #000000;
 	--border-color: #334155;      /* slate border for inputs/cards */
 	--muted-text: #94a3b8;
-	--header-bg: #0d47a1;     /* blue header in dark mode */
-	--header-title: #ffffff;  /* keep the name bright */
+	--header-bg: #0d47a1;         /* blue header in dark mode */
+	--header-title: #ffffff;      /* keep the name bright */
 }
 
 body {
@@ -34,7 +34,7 @@ body {
 	margin: 0;
 	padding: 0;
 	color: var(--text-color);
-	background-color: var(--header-bg);
+	background-color: var(--background-color); /* was header-bg; use page bg */
 	line-height: 1.4;
 	font-size: 100%;
 	transition: background-color var(--transition-duration), color var(--transition-duration);
@@ -49,10 +49,10 @@ header, section, footer {
 	transition: background-color var(--transition-duration), color var(--transition-duration);
 }
 
-/* Add padding to the header for all screen sizes */
+/* Header */
 header {
-	padding: 20px;  /* Add padding to all sides */
-	background-color: var(--primary-color);
+	padding: 20px;
+	background-color: var(--header-bg); /* use dedicated header var */
 	color: var(--white);
 	display: flex;
 	justify-content: space-between;
@@ -74,6 +74,7 @@ header a:hover {
 	color: #f0f0f0;
 }
 
+/* Theme toggle */
 #theme-toggle {
 	font-family: var(--font-family);
 	font-size: 16px;
@@ -86,43 +87,34 @@ header a:hover {
 	outline: none;
 	transition: background-color var(--transition-duration), color var(--transition-duration), box-shadow var(--transition-duration);
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	white-space: nowrap; /* avoid wrap jank */
 }
-
 #theme-toggle:hover {
 	background-color: #00457C;
 	color: #ffffff;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
+.dark-mode #theme-toggle { background-color: #1E88E5; color: #ffffff; }
+.dark-mode #theme-toggle:hover { background-color: #0D47A1; }
 
-.dark-mode #theme-toggle {
-	background-color: #1E88E5;
-	color: #ffffff;
-}
-
-.dark-mode #theme-toggle:hover {
-	background-color: #0D47A1;
-}
-
+/* Dark surfaces (cards/sections/footer) */
 .dark-mode header,
 .dark-mode section,
 .dark-mode footer,
 .dark-mode .code-container {
-	background-color: var(--white);  /* use dark card surface */
+	background-color: var(--white); /* dark card surface */
 	color: var(--text-color);
 	box-shadow: 0 4px 20px rgba(0,0,0,.5);
 }
 
-
-h1, h2, h3, .sub-info, a {
-	font-family: var(--font-family);
-}
+h1, h2, h3, .sub-info, a { font-family: var(--font-family); }
 
 h1 {
 	margin: 0;
 	font-size: 2.25rem;
 	font-weight: bold;
 	letter-spacing: -1px;
-	color: var(--header-title);
+	color: var(--header-title); /* stays readable in both modes */
 }
 
 h2 {
@@ -135,66 +127,29 @@ h2 {
 	font-weight: bold;
 }
 
-h3 {
-	color: var(--secondary-color);
-	font-size: 1.5rem;
-	font-weight: 500;
-	margin-bottom: 5px;
-}
+h3 { color: var(--secondary-color); font-size: 1.5rem; font-weight: 500; margin-bottom: 5px; }
+.sub-info { margin-top: 7px; font-style: italic; color: #555; font-size: 16px; }
 
-.sub-info {
-	margin-top: 7px;
-	font-style: italic;
-	color: #555;
-	font-size: 16px;
-}
+p { font-size: 1.0625rem; margin-top: 0px; }
+a { font-size: 1.0625rem; margin-top: 0px; color: var(--link-color); text-decoration: none; }
+a:hover { color: var(--link-hover-color); }
 
-p {
-	font-size: 1.0625rem;
-	margin-top: 0px;
-}
-
-a {
-	font-size: 1.0625rem;
-	margin-top: 0px;
-	color: var(--link-color);
-	text-decoration: none;
-}
-
-a:hover {
-	color: var(--link-hover-color);
-}
-
-footer p {
-	margin-top: 10px;
-}
-
+/* Footer */
+footer p { margin-top: 10px; }
 footer {
-	background-color: var(--primary-color); /* Remove gradient */
+	background-color: var(--primary-color);
 	color: #fff;
 	text-align: center;
 	padding: 1.5rem;
 	max-width: var(--max-width);
 	margin: 2rem auto;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 	border-radius: 10px;
 }
+footer a { color: #fff; text-decoration: underline; transition: color 0.3s ease; }
+footer a:hover { color: #FFD700; }
 
-footer a {
-	color: #fff;
-	text-decoration: underline;
-	transition: color 0.3s ease;
-}
-
-footer a:hover {
-	color: #FFD700;
-}
-
-li {
-	font-size: 1.0625rem;
-	padding-bottom: 5px;
-}
-
+/* Layout container */
 .code-container {
 	margin: 2rem auto;
 	padding: 1rem 2.5rem;
@@ -204,8 +159,9 @@ li {
 	max-width: var(--max-width);
 }
 
+/* IMPORTANT: keep dark container as card color, not grey */
 .dark-mode .code-container {
-	background-color: var(--primary-color);
+	background-color: var(--white);
 	color: var(--text-color);
 }
 
@@ -216,207 +172,114 @@ section {
 	animation: fadeIn 0.8s ease-out;
 }
 
-/* Always stack header icons vertically */
+/* Right-side header icon column */
 nav {
 	display: flex;
+	flex-direction: vertical;
 	flex-direction: column;
-	align-items: center; /* Center align the icons */
+	align-items: center;
 }
 
-/* Fine-tune container size and icon alignment */
+/* Default icon buttons (global) */
 nav a {
-	margin-bottom: 2px;  /* Slightly reduce the margin between icons */
-	width: 30px;  /* Reduce the container width */
-	height: 30px; /* Reduce the container height */
+	margin-bottom: 2px;
+	width: 30px;
+	height: 30px;
 	display: flex;
-	align-items: center;  /* Center the icons vertically */
-	justify-content: center; /* Center the icons horizontally */
+	align-items: center;
+	justify-content: center;
 	background-color: var(--white);
-	border-radius: 8px;  /* Adjust corners for a smoother look */
+	border-radius: 8px;
 	transition: background-color 0.3s ease, color 0.3s ease;
+	box-sizing: border-box;
 }
+nav a i { font-size: 1.2em; color: var(--primary-color); }
+.nav i.fa { width: 1.25em; }
+nav a:hover { background-color: var(--secondary-color); color: #fff; }
+nav a:hover i { color: #fff; }
 
-nav a i {
-	font-size: 1.2em;  /* Adjust icon size for a better fit */
-	color: var(--primary-color);
+/* Make the header’s three icon pills comfortable size */
+header nav a {
+	width: 36px;  /* larger than global */
+	height: 36px;
+	margin-bottom: 6px;
+	border: none; /* we’ll fake the border with inset shadow */
+	box-shadow: inset 0 0 0 1px transparent;
 }
+header nav a i { font-size: 1.3em; }
 
-.nav i.fa {
-	width: 1.25em; /* Ensure fixed-width icons have a uniform width */
+/* Dark mode for header icon pills: show a border without shrinking */
+.dark-mode header nav a {
+	background-color: var(--white);
+	box-shadow: inset 0 0 0 1px var(--border-color);
 }
+.dark-mode header nav a i { color: var(--secondary-color); }
+.dark-mode header nav a:hover { background-color: var(--secondary-color); }
+.dark-mode header nav a:hover i { color: #fff; }
 
-nav a:hover {
-	background-color: var(--secondary-color);
-	color: #fff;
-}
+/* Section title icon hover */
+h2 i { margin-right: 10px; transition: transform 0.3s ease, color 0.3s ease; }
+h2:hover i { transform: scale(1.1); color: var(--secondary-color); }
 
-nav a:hover i {
-	color: #fff;
-}
-
-/* Updated animation for section title icons */
-h2 i {
-	margin-right: 10px;
-	transition: transform 0.3s ease, color 0.3s ease;
-}
-
-h2:hover i {
-	transform: scale(1.1);
-	color: var(--secondary-color);
-}
-
-/* Button pulse animation */
+/* Animations */
 @keyframes pulse {
-	0% {
-		transform: scale(1);
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
-	}
-	50% {
-		transform: scale(1.1);
-		box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
-	}
-	100% {
-		transform: scale(1);
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
-	}
+	0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2); }
+	50% { transform: scale(1.1); box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2); }
+	100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2); }
 }
+#theme-toggle:active { animation: pulse 0.4s ease-out; }
 
-/* Apply pulse effect on click */
-#theme-toggle:active {
-	animation: pulse 0.4s ease-out;
-}
-
-/* Fade-in animation for sections */
 @keyframes fadeIn {
-	0% {
-		opacity: 0;
-		transform: translateY(20px);
-	}
-	100% {
-		opacity: 1;
-		transform: translateY(0);
-	}
+	0% { opacity: 0; transform: translateY(20px); }
+	100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Smooth transition for dark mode */
-body {
-	transition: background-color 0.5s ease, color 0.5s ease;
-}
+/* Smooth transitions */
+body { transition: background-color 0.5s ease, color 0.5s ease; }
+.dark-mode header, .dark-mode section, .dark-mode footer { transition: background-color 0.5s ease, color 0.5s ease; }
 
-.dark-mode header, .dark-mode section, .dark-mode footer {
-	transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-/* Ensure title and borders are visible in dark mode */
+/* Dark mode heading accents */
 .dark-mode h2 {
-	color: var(--secondary-color); /* Make title color brighter */
-	border-bottom: 4px solid var(--secondary-color); /* Adjust border color */
+	color: var(--secondary-color);
+	border-bottom: 4px solid var(--secondary-color);
+}
+.dark-mode h3 { color: var(--secondary-color); }
+.dark-mode .sub-info { color: var(--muted-text); }
+
+/* Dark footer tune-up */
+.dark-mode footer {
+	background-color: #0f172a;
+	border: 1px solid var(--border-color);
+}
+.dark-mode footer a { color: #c7d2fe; }
+.dark-mode footer a:hover { color: #ffffff; }
+
+/* Inputs/selects anywhere */
+.dark-mode input,
+.dark-mode select,
+.dark-mode textarea {
+	background: #0f172a;
+	color: #e5e7eb;
+	border: 1px solid var(--border-color);
 }
 
-.dark-mode h3 {
-	color: var(--secondary-color); /* Ensure that h3 is also bright */
-}
+/* Keep header blue & title readable in dark */
+.dark-mode header { background-color: var(--header-bg); }
+.dark-mode h1 { color: var(--header-title); }
 
-.dark-mode .sub-info {
-	color: #90CAF9; /* Ensure sub-info is visible in dark mode */
-}
+/* Prevent layout jank when toggling theme */
+header a, nav a { border: 1px solid transparent; box-sizing: border-box; } /* reserve space */
+.dark-mode header a, .dark-mode nav a { border-color: var(--border-color); }
+html { scrollbar-gutter: stable; }
 
-
-@media (max-width: 768px) {
-	header, section, footer, .code-container {
-		margin: 15px;
-		padding: 10px;
-		font-size: 0.96em;
-	}
-
-	h1, h3 {
-		font-size: 1.5em;
-	}
-
-	header p, header a, p1, a {
-		font-size: 1.1em;
-	}
-
-	p, li, .reference-item p {
-		font-size: 0.9em;
-	}
-
-	.reference-item a {
-		font-size: 1.0em;
-	}
-
-	#theme-toggle {
-		font-size: 0.9em;
-	}
-	
-	nav a {
-		margin-bottom: 2px;  /* Slightly reduce the margin between icons */
-		width: 30px;  /* Reduce the container width */
-		height: 30px; /* Reduce the container height */
-	}
-
-	nav a i {
-		font-size: 1.0em;  /* Adjust icon size for a better fit */
-		color: var(--primary-color);
-	}
-
-	.nav i.fa {
-		width: 0.85em; /* Ensure fixed-width icons have a uniform width */
-	}
-}
-
-@media (max-width: 480px) {
-	header, section, footer, .code-container {
-		margin: 10px 5px;
-		padding: 10px;
-		font-size: 0.95em;
-	}
-
-	h1, h3 {
-		font-size: 1.2em;
-	}
-
-	header p, header a, p1, a {
-		font-size: 0.9em;
-	}
-
-	p, li, .reference-item p {
-		font-size: 0.8em;
-	}
-
-	.reference-item a {
-		font-size: 1.0em;
-	}
-
-	#theme-toggle {
-		font-size: 0.8em;
-	}
-	
-	nav a {
-		margin-bottom: 1px;  /* Slightly reduce the margin between icons */
-		width: 20px;  /* Reduce the container width */
-		height: 20px; /* Reduce the container height */
-	}
-	
-	nav a i {
-		font-size: 0.9em;  /* Adjust icon size for a better fit */
-		color: var(--primary-color);
-	}
-
-	.nav i.fa {
-		width: 0.85em; /* Ensure fixed-width icons have a uniform width */
-	}
-}
-
+/* API demo */
 #api-demo .grid {
   display: grid;
-  grid-template-columns: 1fr 180px 160px; /* text | mode | button */
+  grid-template-columns: 1fr 180px 160px;
   gap: 12px;
   align-items: end;
 }
-@media (max-width: 780px) {
-  #api-demo .grid { grid-template-columns: 1fr; }
-}
+@media (max-width: 780px) { #api-demo .grid { grid-template-columns: 1fr; } }
 
 #api-demo label { display: grid; gap: 6px; font-weight: 600; }
 #api-demo input, #api-demo select, #api-demo button {
@@ -433,8 +296,7 @@ body {
 #api-demo button[disabled] { background:#cbd5e1; cursor:not-allowed; box-shadow:none; }
 
 #api-demo .result {
-  margin-top: 12px;
-  background: #0b1020; color: #e5e7eb; padding: 12px 14px;
+  margin-top: 12px; background: #0b1020; color: #e5e7eb; padding: 12px 14px;
   border-radius: 10px; overflow:auto; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   border: 1px solid #111827;
 }
@@ -443,87 +305,38 @@ body {
 .dark-mode #api-demo select { background:#0f172a; color:#e5e7eb; border-color:#334155; }
 .dark-mode #api-demo .result { background:#0b1020; color:#e5e7eb; border-color:#1f2937; }
 
-.dark-mode #api-demo button {
-  background: #1e88e5;      /* primary blue in dark */
-  color: #ffffff;
-  border: 1px solid #1e88e5;
+.dark-mode #api-demo button { background: #1e88e5; color: #ffffff; border: 1px solid #1e88e5; }
+.dark-mode #api-demo button:hover { background: #0d47a1; border-color: #0d47a1; }
+.dark-mode #api-demo button:active { transform: translateY(1px); }
+.dark-mode #api-demo button[disabled] { background: #334155; border-color: #334155; color: #cbd5e1; box-shadow: none; }
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+	header, section, footer, .code-container { margin: 15px; padding: 10px; font-size: 0.96em; }
+	h1, h3 { font-size: 1.5em; }
+	header p, header a, p1, a { font-size: 1.1em; }
+	p, li, .reference-item p { font-size: 0.9em; }
+	.reference-item a { font-size: 1.0em; }
+	#theme-toggle { font-size: 0.9em; }
+
+	/* scale header icon pills slightly down on tablets */
+	header nav a { width: 32px; height: 32px; }
+	nav a { width: 30px; height: 30px; }
+	nav a i { font-size: 1.0em; color: var(--primary-color); }
+	.nav i.fa { width: 0.85em; }
 }
 
-.dark-mode #api-demo button:hover {
-  background: #0d47a1;      /* darker on hover */
-  border-color: #0d47a1;
-}
+@media (max-width: 480px) {
+	header, section, footer, .code-container { margin: 10px 5px; padding: 10px; font-size: 0.95em; }
+	h1, h3 { font-size: 1.2em; }
+	header p, header a, p1, a { font-size: 0.9em; }
+	p, li, .reference-item p { font-size: 0.8em; }
+	.reference-item a { font-size: 1.0em; }
+	#theme-toggle { font-size: 0.8em; }
 
-.dark-mode #api-demo button:active {
-  transform: translateY(1px);
+	/* scale header icon pills for mobile */
+	header nav a { width: 28px; height: 28px; }
+	nav a { width: 24px; height: 24px; }
+	nav a i { font-size: 0.9em; color: var(--primary-color); }
+	.nav i.fa { width: 0.85em; }
 }
-
-.dark-mode #api-demo button[disabled] {
-  background: #334155;      /* slate-ish disabled */
-  border-color: #334155;
-  color: #cbd5e1;
-  box-shadow: none;
-}
-
-/* Header “pill” links */
-.dark-mode header a {
-  background-color: #111827;
-  color: #e5e7eb;
-  border: 1px solid var(--border-color);
-}
-.dark-mode header a:hover {
-  background-color: #0d1b2a;
-  color: #fff;
-}
-
-/* Right-side icon buttons */
-.dark-mode nav a {
-  background-color: #0f172a;
-  border: 1px solid var(--border-color);
-}
-.dark-mode nav a i { color: #e5e7eb; }
-.dark-mode nav a:hover { background-color: #1e293b; }
-
-/* Inputs/selects anywhere (not just the API demo) */
-.dark-mode input,
-.dark-mode select,
-.dark-mode textarea {
-  background: #0f172a;
-  color: #e5e7eb;
-  border: 1px solid var(--border-color);
-}
-
-/* Headings & sub-info balance */
-.dark-mode h2 {
-  color: var(--secondary-color);
-  border-bottom: 4px solid var(--secondary-color);
-}
-.dark-mode h3 { color: var(--secondary-color); }
-.dark-mode .sub-info { color: var(--muted-text); }
-
-/* Footer */
-.dark-mode footer {
-  background-color: #0f172a;
-  border: 1px solid var(--border-color);
-}
-.dark-mode footer a { color: #c7d2fe; }
-.dark-mode footer a:hover { color: #ffffff; }
-
-/* Keep header blue and title readable in dark mode */
-.dark-mode header {
-  background-color: #0d47a1;           /* or keep your brand: #003366 */
-}
-
-.dark-mode h1 {
-  color: #ffffff;                      /* force light title text */
-}
-
-/* prevent theme toggle layout jank */
-header a,
-nav a { border: 1px solid transparent; box-sizing: border-box; }
-.dark-mode header a,
-.dark-mode nav a { border-color: var(--border-color); }
-
-nav a { width: 30px; height: 30px; box-sizing: border-box; }
-#theme-toggle { white-space: nowrap; }
-html { scrollbar-gutter: stable; }
