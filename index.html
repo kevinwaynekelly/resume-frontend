@@ -747,7 +747,6 @@
 	  <p><strong>&copy; <span id="copyright-year"></span> Kevin Kelly. All rights reserved.</strong></p>
 	</footer>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const body = document.body;
@@ -792,8 +791,8 @@
 			body: JSON.stringify({ text, mode })
 		  });
 		  const json = await res.json().catch(() => ({}));
-		  outEl.textContent = (res.ok && json.ok)
-			? `Mode: ${json.mode}\nTransformed: ${json.transformed}`
+		  outEl.innerHTML = (res.ok && json.ok)
+			? `Mode: ${json.mode}<br>Transformed: ${json.transformed}`
 			: (json.error || "Error from API.");
 		} catch {
 		  outEl.textContent = "Network error.";
