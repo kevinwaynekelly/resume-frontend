@@ -340,3 +340,12 @@ html { scrollbar-gutter: stable; }
 	nav a i { font-size: 0.9em; color: var(--primary-color); }
 	.nav i.fa { width: 0.85em; }
 }
+
+section, footer, .code-container {
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.dark-mode section,
+.dark-mode footer,
+.dark-mode .code-container {
+  border: 1px solid rgba(255,255,255,0.06);
+}
