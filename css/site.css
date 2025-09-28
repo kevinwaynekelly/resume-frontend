@@ -17,9 +17,12 @@
 	--primary-color: #1E1E1E;
 	--secondary-color: #64B5F6;
 	--text-color: #E0E0E0;
-	--background-color: #121212;
-	--link-color: white;
-	--header-link-color: black;
+	--background-color: #0b1020;  /* page background */
+	--white: #0f172a;             /* dark “card” surface */
+	--link-color: #ffffff;
+	--header-link-color: #000000;
+	--border-color: #334155;      /* slate border for inputs/cards */
+	--muted-text: #94a3b8;
 }
 
 body {
@@ -96,11 +99,15 @@ header a:hover {
 	background-color: #0D47A1;
 }
 
-.dark-mode header, .dark-mode section, .dark-mode footer {
-	background-color: var(--primary-color);
+.dark-mode header,
+.dark-mode section,
+.dark-mode footer,
+.dark-mode .code-container {
+	background-color: var(--white);  /* use dark card surface */
 	color: var(--text-color);
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 4px 20px rgba(0,0,0,.5);
 }
+
 
 h1, h2, h3, .sub-info, a {
 	font-family: var(--font-family);
@@ -453,3 +460,47 @@ body {
   color: #cbd5e1;
   box-shadow: none;
 }
+
+/* Header “pill” links */
+.dark-mode header a {
+  background-color: #111827;
+  color: #e5e7eb;
+  border: 1px solid var(--border-color);
+}
+.dark-mode header a:hover {
+  background-color: #0d1b2a;
+  color: #fff;
+}
+
+/* Right-side icon buttons */
+.dark-mode nav a {
+  background-color: #0f172a;
+  border: 1px solid var(--border-color);
+}
+.dark-mode nav a i { color: #e5e7eb; }
+.dark-mode nav a:hover { background-color: #1e293b; }
+
+/* Inputs/selects anywhere (not just the API demo) */
+.dark-mode input,
+.dark-mode select,
+.dark-mode textarea {
+  background: #0f172a;
+  color: #e5e7eb;
+  border: 1px solid var(--border-color);
+}
+
+/* Headings & sub-info balance */
+.dark-mode h2 {
+  color: var(--secondary-color);
+  border-bottom: 4px solid var(--secondary-color);
+}
+.dark-mode h3 { color: var(--secondary-color); }
+.dark-mode .sub-info { color: var(--muted-text); }
+
+/* Footer */
+.dark-mode footer {
+  background-color: #0f172a;
+  border: 1px solid var(--border-color);
+}
+.dark-mode footer a { color: #c7d2fe; }
+.dark-mode footer a:hover { color: #ffffff; }
