@@ -1,531 +1,458 @@
-<!-- /index.html -->
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kevin Kelly's professional portfolio showcasing expertise in electrical and computer engineering, including hardware and software projects, employment history, and education.">
+  <meta name="keywords" content="Kevin Kelly, Electrical Engineer, Computer Engineer, hardware engineering, software engineering, projects, employment history, education, portfolio">
+  <meta name="author" content="Kevin Kelly">
 
-    <title>Kevin Kelly - Electrical &amp; Computer Engineer</title>
+  <!-- OpenGraph Meta Tags -->
+  <meta property="og:title" content="Kevin Kelly - Electrical & Computer Engineer">
+  <meta property="og:description" content="Kevin Kelly's professional portfolio showcasing his comprehensive background in hardware and software engineering.">
+  <meta property="og:image" content="https://resume.kevinwaynekelly.com/images/og-image.jpeg">
+  <meta property="og:url" content="https://resume.kevinwaynekelly.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Kevin Kelly's Portfolio">
 
-    <!-- SEO -->
-    <meta name="description" content="Kevin Kelly's professional portfolio showcasing expertise in electrical and computer engineering, including hardware and software projects, employment history, and education." />
-    <meta name="keywords" content="Kevin Kelly, Electrical Engineer, Computer Engineer, hardware engineering, software engineering, projects, employment history, education, portfolio" />
-    <meta name="author" content="Kevin Kelly" />
-    <meta name="color-scheme" content="light dark" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kevin Kelly - Electrical & Computer Engineer">
+  <meta name="twitter:description" content="Showcasing expertise in electrical and computer engineering, including hardware and software projects, employment history, and education.">
+  <meta name="twitter:image" content="https://resume.kevinwaynekelly.com/images/og-image.jpeg">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Kevin Kelly - Electrical &amp; Computer Engineer" />
-    <meta property="og:description" content="Kevin Kelly's professional portfolio showcasing his comprehensive background in hardware and software engineering." />
-    <meta property="og:image" content="https://resume.kevinwaynekelly.com/images/og-image.jpeg" />
-    <meta property="og:url" content="https://resume.kevinwaynekelly.com/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:site_name" content="Kevin Kelly's Portfolio" />
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Kevin Kelly - Electrical &amp; Computer Engineer" />
-    <meta name="twitter:description" content="Showcasing expertise in electrical and computer engineering, including hardware and software projects, employment history, and education." />
-    <meta name="twitter:image" content="https://resume.kevinwaynekelly.com/images/og-image.jpeg" />
+  <!-- External CSS -->
+  <link rel="stylesheet" href="/css/site.css">
 
-    <!-- Icons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
-    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="/css/site.css" />
+  <title>Kevin Kelly - Electrical & Computer Engineer</title>
+</head>
+<body>
+  <div class="code-container">
+    <header>
+      <div>
+        <h1>Kevin Kelly</h1>
+        <p>Electrical & Computer Engineer<br>San Antonio, Texas, United States 78222</p>
+        <button id="theme-toggle" aria-label="Toggle theme">Switch to Dark Mode</button>
+      </div>
+      <nav>
+        <p><a href="mailto:kevinwaynekelly@gmail.com" aria-label="Email Kevin Kelly"><i class="fas fa-envelope"></i></a></p>
+        <p><a href="https://www.linkedin.com/in/kevinwaynekelly/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></p>
+        <p><a href="/docs/Kevin_Kelly_resume.pdf" target="_blank" aria-label="Resume"><i class="fas fa-file-pdf"></i></a></p>
+      </nav>
+    </header>
+	<main>
+		<section id="professional-summary">
+			<h2><i class="fas fa-user"></i> Professional Summary</h2>
+			<p>Electrical Engineering graduate from the University of Texas at Austin with a focus on hardware design, embedded systems, and low-level programming. Skilled in x86 and ARM Assembly, embedded C, Verilog, RTL design, and high-level development with Python, Java, and full-stack web technologies. Experienced in projects spanning ASIC verification, PCB design, real-time image processing, and server deployment. Actively seeking opportunities in ASIC/RTL engineering, embedded development, or systems programming to contribute to high-performance computing and hardware-software integration challenges.</p>
+		</section>
+		<section id="api-demo">
+		  <h2>
+			<i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
+			<span class="sr-only">API and Encryption Demo</span>
+			API & Encryption Demo
+		  </h2>
+		  <div class="grid">
+			<label>
+			  <span>Your text</span>
+			  <input id="demo-text" placeholder="Type something..." />
+			</label>
+			<label>
+			  <span>Mode</span>
+			  <select id="demo-mode">
+				<option value="uppercase">Uppercase</option>
+				<option value="reverse">Reverse</option>
+				<option value="sparkles">Sparkles ✨</option>
+				<option value="snake">snake_case</option>
+			  </select>
+			</label>
+			<button id="demo-send">Send to API</button>
+		  </div>
+		  <div class="result" id="demo-out">—</div>
+		  <div class="result" id="demo-encrypted">—</div>
+		</section>
+		<section id="education">
+			<h2><i class="fas fa-graduation-cap"></i> Education</h2>
+			<article>
+				<h3>Bachelor of Science in Electrical Engineering</h3>
+				<p class="sub-info">The University of Texas at Austin, Austin, TX — Aug 2019 - May 2023</p>
+				<ul>
+					<li>Built strong foundations in hardware design, embedded systems, and computer engineering.</li>
+					<li>Developed expertise in iterative development, testing methodologies, and technical communication.</li>
+					<li>Applied low-level programming skills in x86 Assembly, ARM Assembly, Verilog, RTL Design.</li>
+					<li>Gained proficiency in high-level languages including C, C++, Java, Python, JavaScript, SQL, HTML/CSS.</li>
+					<li>Completed projects spanning circuit design, embedded controllers, and system integration.</li>
+					<li>Relevant Coursework: Digital Logic Design, Computer Architecture, Operating Systems, Embedded Systems, Signal Processing, Data Structures & Algorithms, Software/Requirements Engineering.</li>
+				</ul>
+			</article>
+		</section>
+		<section id="projects">
+			<h2><i class="fas fa-tasks"></i> Projects</h2>
+		
+			<article>
+				<h3>Formal Circuit Verification Algorithm</h3>
+				<p class="sub-info">Sponsored by Cadence Design Systems Inc.</p>
+				<ul>
+					<li>Developed a C++ tool to remove cycles from digital circuit graphs for formal verification workflows.</li>
+					<li>Implemented Tarjan’s SCC algorithm, Eades approximation, and backtracking approaches for feedback arc set problems.</li>
+					<li>Benchmarked and optimized algorithms for performance across varied RTL topologies.</li>
+					<li>Prepared large RTL designs for industrial use in Cadence’s verification toolchain.</li>
+				</ul>
+			</article>
+		
+			<article>
+				<h3>ARM-Based USB Game Controller</h3>
+				<p class="sub-info">Hardware Keystone</p>
+				<ul>
+					<li>Engineered PCB and circuitry for a custom USB game controller with an ARM microcontroller.</li>
+					<li>Integrated two joysticks and 12 buttons with low-latency USB communication.</li>
+					<li>Designed end-to-end solution from hardware schematics through embedded firmware integration.</li>
+					<li>Demonstrated practical expertise in PCB design, embedded systems, and hardware/software interfacing.</li>
+				</ul>
+			</article>
+		
+			<article>
+				<h3>Website Data Management and Deployment</h3>
+				<p class="sub-info">Software Keystone</p>
+				<ul>
+					<li>Led full-stack deployment of a project management website using React, Node.js, MongoDB, Heroku, Python, and SQL.</li>
+					<li>Built REST APIs for seamless data exchange and efficient client-server communication.</li>
+					<li>Managed complex database systems with secure and scalable handling of structured data.</li>
+					<li>Delivered a production-ready platform demonstrating full-stack engineering capabilities.</li>
+				</ul>
+			</article>
+		
+			<article>
+				<h3>Real-Time Facial Expression Recognition</h3>
+				<p class="sub-info">Digital Image Processing and Machine Learning</p>
+				<ul>
+					<li>Implemented real-time facial expression detection with Python and OpenCV using Haar cascades.</li>
+					<li>Mapped expressions (happiness, sadness, surprise) to smart home automation events via IFTTT.</li>
+					<li>Demonstrated integration of embedded software, computer vision, and IoT systems.</li>
+					<li>Created an intuitive human-computer interaction pipeline with real-world applications.</li>
+				</ul>
+			</article>
+		
+			<article>
+				<h3>AI Detection System Requirements</h3>
+				<p class="sub-info">Requirements Engineering</p>
+				<ul>
+					<li>Conducted stakeholder analysis with educators and IT professionals to capture system needs.</li>
+					<li>Defined functional and non-functional requirements for an academic AI-content detection tool.</li>
+					<li>Outlined integration with existing learning management systems to ensure adoption.</li>
+					<li>Produced a structured, traceable requirements document for system development.</li>
+				</ul>
+			</article>
+		
+			<article>
+				<h3>Unraid Home Server Deployment</h3>
+				<p class="sub-info">Personal Project</p>
+				<ul>
+					<li>Deployed and maintain an Unraid-based home server hosting Dockerized microservices.</li>
+					<li>Configured redundant storage arrays and parity drives for fault tolerance and data integrity.</li>
+					<li>Implemented self-hosted DNS with local caching to accelerate network requests.</li>
+					<li>Configured reverse proxies, VPN tunneling, and network segmentation for security.</li>
+					<li>Developed Linux VM workloads for media, automation pipelines, and monitoring dashboards.</li>
+					<li>Demonstrated applied experience in container orchestration, virtualization, and sysadmin practices.</li>
+				</ul>
+			</article>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  </head>
+			<article>
+			  <h3>Professional Portfolio Website</h3>
+			  <p class="sub-info">Personal Project</p>
+			  <ul>
+				<li>Built and deployed a responsive portfolio site (<a href="https://resume.kevinwaynekelly.com" target="_blank">resume.kevinwaynekelly.com</a>) to showcase education, projects, and employment history.</li>
+				<li>Implemented modern web standards: HTML5, CSS3, JavaScript, and grid/flex layouts with a fully responsive design.</li>
+				<li>Added dark mode toggle, custom theming, OpenGraph/Twitter meta tags, and SEO optimization for professional presentation.</li>
+				<li>Integrated icons, references, and downloadable résumé links to provide an interactive candidate profile.</li>
+			  </ul>
+			</article>
 
-  <body>
-    <div class="code-container">
-      <header>
-        <div>
-          <h1>Kevin Kelly</h1>
-          <p>
-            Electrical &amp; Computer Engineer<br />
-            San Antonio, Texas, United States 78222
-          </p>
-          <button id="theme-toggle" type="button" aria-label="Toggle theme">Switch to Dark Mode</button>
-        </div>
+		</section>
+		<section id="employment-history">
+			<h2><i class="fas fa-briefcase"></i> Employment History</h2>
+		
+			<article>
+				<h3>Audio Video Student Supervisor</h3>
+				<p class="sub-info">The University of Texas at Austin, Austin, TX — Sep 2021 - Aug 2023</p>
+				<ul>
+					<li>Directed and managed a team of 15+ technicians to deliver high-quality live events.</li>
+					<li>Oversaw infrastructure upkeep and upgrades to align with evolving technology standards.</li>
+					<li>Trained and supervised new hires, ensuring consistent service quality and technical competency.</li>
+					<li>Maintained client satisfaction by resolving issues quickly and adapting to event-specific needs.</li>
+				</ul>
+			</article>
+		
+			<article>
+				<h3>Audio Video Cactus Café Operator</h3>
+				<p class="sub-info">The University of Texas at Austin, Austin, TX — Sep 2021 - Aug 2023</p>
+				<ul>
+					<li>Collaborated directly with clients to deliver professional live sound services at a high-profile venue.</li>
+					<li>Configured and operated complex audio equipment to meet diverse performance requirements.</li>
+					<li>Ensured fast execution of client requests in a dynamic, time-sensitive environment.</li>
+				</ul>
+			</article>
+		
+			<article>
+				<h3>Audio Video Student Operator</h3>
+				<p class="sub-info">The University of Texas at Austin, Austin, TX — Feb 2020 - Aug 2023</p>
+				<ul>
+					<li>Delivered live sound services across the Texas Union, supporting conferences, concerts, and events.</li>
+					<li>Worked directly with clients to translate requirements into technical execution.</li>
+					<li>Coordinated with team members to ensure seamless event operations under strict time constraints.</li>
+					<li>Adapted quickly to venue technology and equipment to optimize event outcomes.</li>
+				</ul>
+			</article>
+		
+			<article>
+				<h3>Audio Video Assistant</h3>
+				<p class="sub-info">The University of Texas at Austin, Austin, TX — Sep 2019 - Sep 2021</p>
+				<ul>
+					<li>Supported event execution under the direction of stage managers and technical leads.</li>
+					<li>Contributed ideas to improve audio/visual setups and enhance client experiences.</li>
+					<li>Ensured accurate implementation of technical requirements during live events.</li>
+				</ul>
+			</article>
+		
+			<article>
+				<h3>Information Technology Intern</h3>
+				<p class="sub-info">East Central Independent School District, San Antonio, TX — May 2018 - Aug 2018</p>
+				<ul>
+					<li>Repaired and maintained laptops, desktops, and school technology equipment for district-wide use.</li>
+					<li>Deployed and configured new hardware to support staff and student operations.</li>
+					<li>Gained practical IT experience in troubleshooting, hardware installation, and system configuration.</li>
+				</ul>
+			</article>
+		</section>
+		<section id="skills">
+		  <h2><i class="fas fa-code"></i> Skills</h2>
+		
+		  <!-- switched from flex to grid -->
+		  <div style="
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+			gap: 20px;
+			align-items: start;
+		  ">
+		
+			<div>
+			  <h3>Programming Languages</h3>
+			  <ul>
+				<li>ARM Assembly, x86 Assembly</li>
+				<li>C, C++, C#, Java, Python</li>
+				<li>JavaScript, SQL, Lua, HTML5, CSS</li>
+			  </ul>
+			</div>
+		
+			<div>
+			  <h3>Hardware / Systems</h3>
+			  <ul>
+				<li>Verilog, RTL Design, Logic Synthesis, Formal Verification</li>
+				<li>SoC Integration, Embedded Systems, PCB Design</li>
+				<li>System Architecture, Linux, Operating Systems, Virtualization</li>
+			  </ul>
+			</div>
+		
+			<div>
+			  <h3>Frameworks / Tools</h3>
+			  <ul>
+				<li>React.js, Node.js, OpenCV, IoT, AWS</li>
+				<li>Git, Docker, MATLAB, WordPress</li>
+				<li>MongoDB, PostgreSQL, Redis, Version Control</li>
+			  </ul>
+			</div>
+		
+			<div>
+			  <h3>Additional</h3>
+			  <ul>
+				<li>Agile & Waterfall Methodologies</li>
+				<li>Project Management, Requirements Engineering</li>
+				<li>Network Administration, Unit Testing</li>
+				<li>Data Structures & Algorithms</li>
+			  </ul>
+			</div>
+		
+		  </div>
+		</section>
 
-        <nav aria-label="Primary">
-          <p>
-            <a href="mailto:kevinwaynekelly@gmail.com" aria-label="Email Kevin Kelly">
-              <i class="fas fa-envelope" aria-hidden="true"></i>
-            </a>
-          </p>
-          <p>
-            <a href="https://www.linkedin.com/in/kevinwaynekelly/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <i class="fab fa-linkedin" aria-hidden="true"></i>
-            </a>
-          </p>
-          <p>
-            <a href="/docs/Kevin_Kelly_resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Resume">
-              <i class="fas fa-file-pdf" aria-hidden="true"></i>
-            </a>
-          </p>
-        </nav>
-      </header>
+		<section id="references">
+			<h2><i class="fas fa-address-book"></i> References</h2>
+			<p>The following are references who can attest to my professional qualifications and work experience:</p>
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+				<div class="reference-item">
+					<h3>Barry Alvear</h3>
+					<p><strong>Position:</strong> Technical Coordinator</p>
+					<p><strong>Company:</strong> The University of Texas at Austin</p>
+					<p><strong>Email:</strong> <a href="mailto:barryalvear@gmail.com">barryalvear@gmail.com</a></p>
+					<p><strong>Phone:</strong> Available upon request.</p>
+				</div>
+				<div class="reference-item">
+					<h3>Oscar Sanchez</h3>
+					<p><strong>Position:</strong> Technical Services Manager</p>
+					<p><strong>Company:</strong> The University of Texas at Austin</p>
+					<p><strong>Email:</strong> <a href="mailto:oscar.sanchez@austin.utexas.edu">oscar.sanchez@austin.utexas.edu</a></p>
+					<p><strong>Phone:</strong> Available upon request.</p>
+				</div>
+			</div>
+		</section>
+	</main>
 
-      <main>
-        <section id="professional-summary">
-          <h2>
-            <i class="fas fa-user" aria-hidden="true"></i>
-            <span class="sr-only">Professional Summary</span>
-            Professional Summary
-          </h2>
-          <p>
-            Electrical Engineering graduate from the University of Texas at Austin with a focus on hardware design, embedded systems, and low-level programming. Skilled in x86 and ARM Assembly, embedded C, Verilog, RTL design, and high-level development with Python, Java, and full-stack web technologies. Experienced in projects spanning ASIC verification, PCB design, real-time image processing, and server deployment. Actively seeking opportunities in ASIC/RTL engineering, embedded development, or systems programming to contribute to high-performance computing and hardware-software integration challenges.
-          </p>
-        </section>
+    <footer>
+      <p><strong>&copy; <span id="copyright-year"></span> Kevin Kelly. All rights reserved.</strong></p>
+    </footer>
+  </div>
 
-        <section id="api-demo">
-          <h2>
-            <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
-            <span class="sr-only">API and Encryption Demo</span>
-            API &amp; Encryption Demo
-          </h2>
-
-          <div class="grid">
-            <label for="demo-text">
-              <span>Your text</span>
-              <input id="demo-text" placeholder="Type something..." autocomplete="off" />
-            </label>
-
-            <label for="demo-mode">
-              <span>Mode</span>
-              <select id="demo-mode">
-                <option value="uppercase">Uppercase</option>
-                <option value="reverse">Reverse</option>
-                <option value="sparkles">Sparkles ✨</option>
-                <option value="snake">snake_case</option>
-              </select>
-            </label>
-
-            <button id="demo-send" type="button">Send to API</button>
-          </div>
-
-          <div class="result" id="demo-out" aria-live="polite">—</div>
-          <div class="result" id="demo-encrypted" aria-live="polite">—</div>
-        </section>
-
-        <section id="education">
-          <h2>
-            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-            <span class="sr-only">Education</span>
-            Education
-          </h2>
-
-          <article>
-            <h3>Bachelor of Science in Electrical Engineering</h3>
-            <p class="sub-info">The University of Texas at Austin, Austin, TX — Aug 2019 - May 2023</p>
-            <ul>
-              <li>Built strong foundations in hardware design, embedded systems, and computer engineering.</li>
-              <li>Developed expertise in iterative development, testing methodologies, and technical communication.</li>
-              <li>Applied low-level programming skills in x86 Assembly, ARM Assembly, Verilog, RTL Design.</li>
-              <li>Gained proficiency in high-level languages including C, C++, Java, Python, JavaScript, SQL, HTML/CSS.</li>
-              <li>Completed projects spanning circuit design, embedded controllers, and system integration.</li>
-              <li>Relevant Coursework: Digital Logic Design, Computer Architecture, Operating Systems, Embedded Systems, Signal Processing, Data Structures &amp; Algorithms, Software/Requirements Engineering.</li>
-            </ul>
-          </article>
-        </section>
-
-        <section id="projects">
-          <h2>
-            <i class="fas fa-tasks" aria-hidden="true"></i>
-            <span class="sr-only">Projects</span>
-            Projects
-          </h2>
-
-          <article>
-            <h3>Formal Circuit Verification Algorithm</h3>
-            <p class="sub-info">Sponsored by Cadence Design Systems Inc.</p>
-            <ul>
-              <li>Developed a C++ tool to remove cycles from digital circuit graphs for formal verification workflows.</li>
-              <li>Implemented Tarjan’s SCC algorithm, Eades approximation, and backtracking approaches for feedback arc set problems.</li>
-              <li>Benchmarked and optimized algorithms for performance across varied RTL topologies.</li>
-              <li>Prepared large RTL designs for industrial use in Cadence’s verification toolchain.</li>
-            </ul>
-          </article>
-
-          <article>
-            <h3>ARM-Based USB Game Controller</h3>
-            <p class="sub-info">Hardware Keystone</p>
-            <ul>
-              <li>Engineered PCB and circuitry for a custom USB game controller with an ARM microcontroller.</li>
-              <li>Integrated two joysticks and 12 buttons with low-latency USB communication.</li>
-              <li>Designed end-to-end solution from hardware schematics through embedded firmware integration.</li>
-              <li>Demonstrated practical expertise in PCB design, embedded systems, and hardware/software interfacing.</li>
-            </ul>
-          </article>
-
-          <article>
-            <h3>Website Data Management and Deployment</h3>
-            <p class="sub-info">Software Keystone</p>
-            <ul>
-              <li>Led full-stack deployment of a project management website using React, Node.js, MongoDB, Heroku, Python, and SQL.</li>
-              <li>Built REST APIs for seamless data exchange and efficient client-server communication.</li>
-              <li>Managed complex database systems with secure and scalable handling of structured data.</li>
-              <li>Delivered a production-ready platform demonstrating full-stack engineering capabilities.</li>
-            </ul>
-          </article>
-
-          <article>
-            <h3>Real-Time Facial Expression Recognition</h3>
-            <p class="sub-info">Digital Image Processing and Machine Learning</p>
-            <ul>
-              <li>Implemented real-time facial expression detection with Python and OpenCV using Haar cascades.</li>
-              <li>Mapped expressions (happiness, sadness, surprise) to smart home automation events via IFTTT.</li>
-              <li>Demonstrated integration of embedded software, computer vision, and IoT systems.</li>
-              <li>Created an intuitive human-computer interaction pipeline with real-world applications.</li>
-            </ul>
-          </article>
-
-          <article>
-            <h3>AI Detection System Requirements</h3>
-            <p class="sub-info">Requirements Engineering</p>
-            <ul>
-              <li>Conducted stakeholder analysis with educators and IT professionals to capture system needs.</li>
-              <li>Defined functional and non-functional requirements for an academic AI-content detection tool.</li>
-              <li>Outlined integration with existing learning management systems to ensure adoption.</li>
-              <li>Produced a structured, traceable requirements document for system development.</li>
-            </ul>
-          </article>
-
-          <article>
-            <h3>Unraid Home Server Deployment</h3>
-            <p class="sub-info">Personal Project</p>
-            <ul>
-              <li>Deployed and maintain an Unraid-based home server hosting Dockerized microservices.</li>
-              <li>Configured redundant storage arrays and parity drives for fault tolerance and data integrity.</li>
-              <li>Implemented self-hosted DNS with local caching to accelerate network requests.</li>
-              <li>Configured reverse proxies, VPN tunneling, and network segmentation for security.</li>
-              <li>Developed Linux VM workloads for media, automation pipelines, and monitoring dashboards.</li>
-              <li>Demonstrated applied experience in container orchestration, virtualization, and sysadmin practices.</li>
-            </ul>
-          </article>
-
-          <article>
-            <h3>Professional Portfolio Website</h3>
-            <p class="sub-info">Personal Project</p>
-            <ul>
-              <li>
-                Built and deployed a responsive portfolio site (
-                <a href="https://resume.kevinwaynekelly.com" target="_blank" rel="noopener noreferrer">resume.kevinwaynekelly.com</a>
-                ) to showcase education, projects, and employment history.
-              </li>
-              <li>Implemented modern web standards: HTML5, CSS3, JavaScript, and grid/flex layouts with a fully responsive design.</li>
-              <li>Added dark mode toggle, custom theming, OpenGraph/Twitter meta tags, and SEO optimization for professional presentation.</li>
-              <li>Integrated icons, references, and downloadable résumé links to provide an interactive candidate profile.</li>
-            </ul>
-          </article>
-        </section>
-
-        <section id="employment-history">
-          <h2>
-            <i class="fas fa-briefcase" aria-hidden="true"></i>
-            <span class="sr-only">Employment History</span>
-            Employment History
-          </h2>
-
-          <article>
-            <h3>Audio Video Student Supervisor</h3>
-            <p class="sub-info">The University of Texas at Austin, Austin, TX — Sep 2021 - Aug 2023</p>
-            <ul>
-              <li>Directed and managed a team of 15+ technicians to deliver high-quality live events.</li>
-              <li>Oversaw infrastructure upkeep and upgrades to align with evolving technology standards.</li>
-              <li>Trained and supervised new hires, ensuring consistent service quality and technical competency.</li>
-              <li>Maintained client satisfaction by resolving issues quickly and adapting to event-specific needs.</li>
-            </ul>
-          </article>
-
-          <article>
-            <h3>Audio Video Cactus Café Operator</h3>
-            <p class="sub-info">The University of Texas at Austin, Austin, TX — Sep 2021 - Aug 2023</p>
-            <ul>
-              <li>Collaborated directly with clients to deliver professional live sound services at a high-profile venue.</li>
-              <li>Configured and operated complex audio equipment to meet diverse performance requirements.</li>
-              <li>Ensured fast execution of client requests in a dynamic, time-sensitive environment.</li>
-            </ul>
-          </article>
-
-          <article>
-            <h3>Audio Video Student Operator</h3>
-            <p class="sub-info">The University of Texas at Austin, Austin, TX — Feb 2020 - Aug 2023</p>
-            <ul>
-              <li>Delivered live sound services across the Texas Union, supporting conferences, concerts, and events.</li>
-              <li>Worked directly with clients to translate requirements into technical execution.</li>
-              <li>Coordinated with team members to ensure seamless event operations under strict time constraints.</li>
-              <li>Adapted quickly to venue technology and equipment to optimize event outcomes.</li>
-            </ul>
-          </article>
-
-          <article>
-            <h3>Audio Video Assistant</h3>
-            <p class="sub-info">The University of Texas at Austin, Austin, TX — Sep 2019 - Sep 2021</p>
-            <ul>
-              <li>Supported event execution under the direction of stage managers and technical leads.</li>
-              <li>Contributed ideas to improve audio/visual setups and enhance client experiences.</li>
-              <li>Ensured accurate implementation of technical requirements during live events.</li>
-            </ul>
-          </article>
-
-          <article>
-            <h3>Information Technology Intern</h3>
-            <p class="sub-info">East Central Independent School District, San Antonio, TX — May 2018 - Aug 2018</p>
-            <ul>
-              <li>Repaired and maintained laptops, desktops, and school technology equipment for district-wide use.</li>
-              <li>Deployed and configured new hardware to support staff and student operations.</li>
-              <li>Gained practical IT experience in troubleshooting, hardware installation, and system configuration.</li>
-            </ul>
-          </article>
-        </section>
-
-        <section id="skills">
-          <h2>
-            <i class="fas fa-code" aria-hidden="true"></i>
-            <span class="sr-only">Skills</span>
-            Skills
-          </h2>
-
-          <!-- inline grid for compactness; move to CSS if desired -->
-          <div
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; align-items: start;"
-          >
-            <div>
-              <h3>Programming Languages</h3>
-              <ul>
-                <li>ARM Assembly, x86 Assembly</li>
-                <li>C, C++, C#, Java, Python</li>
-                <li>JavaScript, SQL, Lua, HTML5, CSS</li>
-              </ul>
-            </div>
-
-            <div>
-              <h3>Hardware / Systems</h3>
-              <ul>
-                <li>Verilog, RTL Design, Logic Synthesis, Formal Verification</li>
-                <li>SoC Integration, Embedded Systems, PCB Design</li>
-                <li>System Architecture, Linux, Operating Systems, Virtualization</li>
-              </ul>
-            </div>
-
-            <div>
-              <h3>Frameworks / Tools</h3>
-              <ul>
-                <li>React.js, Node.js, OpenCV, IoT, AWS</li>
-                <li>Git, Docker, MATLAB, WordPress</li>
-                <li>MongoDB, PostgreSQL, Redis, Version Control</li>
-              </ul>
-            </div>
-
-            <div>
-              <h3>Additional</h3>
-              <ul>
-                <li>Agile &amp; Waterfall Methodologies</li>
-                <li>Project Management, Requirements Engineering</li>
-                <li>Network Administration, Unit Testing</li>
-                <li>Data Structures &amp; Algorithms</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section id="references">
-          <h2>
-            <i class="fas fa-address-book" aria-hidden="true"></i>
-            <span class="sr-only">References</span>
-            References
-          </h2>
-
-          <p>The following are references who can attest to my professional qualifications and work experience:</p>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div class="reference-item">
-              <h3>Barry Alvear</h3>
-              <p><strong>Position:</strong> Technical Coordinator</p>
-              <p><strong>Company:</strong> The University of Texas at Austin</p>
-              <p>
-                <strong>Email:</strong>
-                <a href="mailto:barryalvear@gmail.com">barryalvear@gmail.com</a>
-              </p>
-              <p><strong>Phone:</strong> Available upon request.</p>
-            </div>
-
-            <div class="reference-item">
-              <h3>Oscar Sanchez</h3>
-              <p><strong>Position:</strong> Technical Services Manager</p>
-              <p><strong>Company:</strong> The University of Texas at Austin</p>
-              <p>
-                <strong>Email:</strong>
-                <a href="mailto:oscar.sanchez@austin.utexas.edu">oscar.sanchez@austin.utexas.edu</a>
-              </p>
-              <p><strong>Phone:</strong> Available upon request.</p>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer>
-        <p>
-          <strong>&copy; <span id="copyright-year"></span> Kevin Kelly. All rights reserved.</strong>
-        </p>
-      </footer>
-    </div>
-
-    <!-- Scripts -->
-    <script>
-      // Initialize theme + footer year once DOM is ready
-      document.addEventListener("DOMContentLoaded", () => {
-        const body = document.body;
-        const themeToggleButton = document.getElementById("theme-toggle");
-
-        const storedTheme = localStorage.getItem("theme");
-        if (storedTheme === "dark") {
-          body.classList.add("dark-mode");
-          themeToggleButton.textContent = "Switch to Light Mode";
-        }
-
-        themeToggleButton.addEventListener("click", () => {
-          body.classList.toggle("dark-mode");
-          const isDark = body.classList.contains("dark-mode");
-          themeToggleButton.textContent = isDark ? "Switch to Light Mode" : "Switch to Dark Mode";
-          localStorage.setItem("theme", isDark ? "dark" : "light");
-        });
-
-        const yearEl = document.getElementById("copyright-year");
-        if (yearEl) yearEl.textContent = new Date().getFullYear();
+  <!-- Scripts -->
+  <script>
+    // Theme toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const body = document.body;
+      const themeToggleButton = document.getElementById('theme-toggle');
+      if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+        themeToggleButton.textContent = 'Switch to Light Mode';
+      }
+      themeToggleButton.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        themeToggleButton.textContent = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
       });
-    </script>
+    });
 
-    <script>
-      // ====== Config ======
-      const API_URL = "https://api.kevinwaynekelly.com";
-      const PUBLIC_KEY_URL = "/keys/public.pem"; // serve your SPKI public key here
+    // Year in footer
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("copyright-year").textContent = new Date().getFullYear();
+    });
+	</script>
+	<script>
+	  // ====== Config ======
+	  const API_URL = "https://api.kevinwaynekelly.com";
+	  const PUBLIC_KEY_URL = "/keys/public.pem"; // serve your SPKI public key here
 
-      // ====== DOM helpers ======
-      const $ = (id) => document.getElementById(id);
-      const textEl = $("demo-text");
-      const modeEl = $("demo-mode");
-      const outEl = $("demo-out");
-      const btn = $("demo-send");
-      const encEl = $("demo-encrypted"); // shows ciphertext
+	  // ====== DOM helpers ======
+	  const $ = (id) => document.getElementById(id);
+	  const textEl = $("demo-text");
+	  const modeEl = $("demo-mode");
+	  const outEl  = $("demo-out");
+	  const btn    = $("demo-send");
+	  const encEl  = $("demo-encrypted"); // <- new box to show ciphertext
 
-      // ====== Crypto helpers ======
-      let cachedPublicKey = null;
+	  // ====== Crypto helpers ======
+	  let cachedPublicKey = null;
 
-      async function fetchPublicKeyPem() {
-        const res = await fetch(PUBLIC_KEY_URL, { cache: "reload" });
-        if (!res.ok) throw new Error("Failed to fetch public key");
-        return res.text();
-      }
+	  async function fetchPublicKeyPem() {
+		const res = await fetch(PUBLIC_KEY_URL, { cache: "reload" });
+		if (!res.ok) throw new Error("Failed to fetch public key");
+		return await res.text();
+	  }
 
-      function pemToArrayBuffer(pem, begin, end) {
-        const lines = pem.trim().split(/\r?\n/);
-        const b = lines.indexOf(begin);
-        const e = lines.indexOf(end);
-        if (b === -1 || e === -1 || e <= b + 1) throw new Error("Bad PEM format");
-        const base64 = lines.slice(b + 1, e).join("");
-        const bin = atob(base64);
-        const bytes = new Uint8Array(bin.length);
-        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-        return bytes.buffer;
-      }
+	  function pemToArrayBuffer(pem, begin, end) {
+		const lines = pem.trim().split(/\r?\n/);
+		const b = lines.indexOf(begin);
+		const e = lines.indexOf(end);
+		if (b === -1 || e === -1 || e <= b + 1) throw new Error("Bad PEM format");
+		const base64 = lines.slice(b + 1, e).join("");
+		const bin = atob(base64);
+		const bytes = new Uint8Array(bin.length);
+		for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+		return bytes.buffer;
+	  }
 
-      async function importPublicKeyFromPem(pemText) {
-        const spki = pemToArrayBuffer(pemText, "-----BEGIN PUBLIC KEY-----", "-----END PUBLIC KEY-----");
-        return crypto.subtle.importKey("spki", spki, { name: "RSA-OAEP", hash: "SHA-256" }, false, ["encrypt"]);
-      }
+	  async function importPublicKeyFromPem(pemText) {
+		const spki = pemToArrayBuffer(pemText, "-----BEGIN PUBLIC KEY-----", "-----END PUBLIC KEY-----");
+		return crypto.subtle.importKey(
+		  "spki",
+		  spki,
+		  { name: "RSA-OAEP", hash: "SHA-256" },
+		  false,
+		  ["encrypt"]
+		);
+	  }
 
-      function toBase64url(bytes) {
-        const b64 = btoa(String.fromCharCode(...bytes));
-        return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-      }
+	  function toBase64url(bytes) {
+		const b64 = btoa(String.fromCharCode(...bytes));
+		return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/,"");
+	  }
 
-      async function encryptPayload(obj) {
-        if (!cachedPublicKey) {
-          const pem = await fetchPublicKeyPem();
-          cachedPublicKey = await importPublicKeyFromPem(pem);
-        }
-        const data = new TextEncoder().encode(JSON.stringify(obj));
-        const ct = await crypto.subtle.encrypt({ name: "RSA-OAEP" }, cachedPublicKey, data);
-        return toBase64url(new Uint8Array(ct));
-      }
+	  async function encryptPayload(obj) {
+		if (!cachedPublicKey) {
+		  const pem = await fetchPublicKeyPem();
+		  cachedPublicKey = await importPublicKeyFromPem(pem);
+		}
+		const data = new TextEncoder().encode(JSON.stringify(obj));
+		const ct = await crypto.subtle.encrypt({ name: "RSA-OAEP" }, cachedPublicKey, data);
+		return toBase64url(new Uint8Array(ct));
+	  }
 
-      function formatCiphertext(str) {
-        // keep preview readable in UI
-        return str.length > 160 ? `${str.slice(0, 160)}… (${str.length} chars)` : str;
-      }
+	  // Small helper to make long strings readable
+	  function formatCiphertext(str) {
+		const preview = str.length > 160 ? str.slice(0,160) + "… (" + str.length + " chars)" : str;
+		return preview;
+	  }
+	  async function copy(text) {
+		try { await navigator.clipboard.writeText(text); return true; } catch { return false; }
+	  }
 
-      async function copy(text) {
-        try {
-          await navigator.clipboard.writeText(text);
-          return true;
-        } catch {
-          return false;
-        }
-      }
+	  // ====== UI wiring ======
+	  btn.addEventListener("click", async () => {
+		const text = (textEl.value || "").trim();
+		const mode = modeEl.value;
+		if (!text) { outEl.textContent = "Please enter some text."; return; }
 
-      // ====== UI wiring ======
-      btn.addEventListener("click", async () => {
-        const text = (textEl.value || "").trim();
-        const mode = modeEl.value;
-        if (!text) {
-          outEl.textContent = "Please enter some text.";
-          return;
-        }
+		btn.disabled = true;
+		outEl.textContent = "Working…";
+		encEl.textContent = "Encrypting…";
 
-        btn.disabled = true;
-        outEl.textContent = "Working…";
-        encEl.textContent = "Encrypting…";
+		try {
+		  // Encrypt on the client
+		  const ciphertext = await encryptPayload({ text, mode });
 
-        try {
-          // Encrypt on the client
-          const ciphertext = await encryptPayload({ text, mode });
+		  // Show the exact encrypted payload being sent
+		  encEl.innerHTML = `
+			<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+			  <strong>Encrypted payload (base64url):</strong>
+			  <button id="copy-ct" style="padding:.35rem .6rem;border:none;border-radius:8px;cursor:pointer;background:var(--primary-color);color:#fff;">
+				Copy
+			  </button>
+			</div>
+			<div style="margin-top:8px;word-break:break-all;font-size:.95em;">${formatCiphertext(ciphertext)}</div>
+		  `;
+		  // Copy handler
+		  $("copy-ct")?.addEventListener("click", async () => {
+			const ok = await copy(ciphertext);
+			$("copy-ct").textContent = ok ? "Copied!" : "Copy failed";
+			setTimeout(() => ($("copy-ct").textContent = "Copy"), 1200);
+		  });
 
-          // Show the exact encrypted payload being sent
-          encEl.innerHTML = `
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-              <strong>Encrypted payload (base64url):</strong>
-              <button id="copy-ct" style="padding:.35rem .6rem;border:none;border-radius:8px;cursor:pointer;background:var(--primary-color);color:#fff;">Copy</button>
-            </div>
-            <div style="margin-top:8px;word-break:break-all;font-size:.95em;">${formatCiphertext(ciphertext)}</div>
-          `;
+		  // Send encrypted blob to your Worker
+		  const res = await fetch(API_URL, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ ciphertext })
+		  });
 
-          // Copy handler
-          $("copy-ct")?.addEventListener("click", async () => {
-            const ok = await copy(ciphertext);
-            const btnEl = $("copy-ct");
-            if (btnEl) {
-              btnEl.textContent = ok ? "Copied!" : "Copy failed";
-              setTimeout(() => (btnEl.textContent = "Copy"), 1200);
-            }
-          });
-
-          // Send encrypted blob to your Worker
-          const res = await fetch(API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ciphertext })
-          });
-
-          const json = (await res.json().catch(() => ({})));
-          if (res.ok && json.ok) {
-            outEl.innerHTML = `Mode: ${json.mode}<br>Transformed: ${json.transformed}`;
-          } else {
-            outEl.textContent = json.error || "Error from API.";
-          }
-        } catch (err) {
-          console.error(err);
-          encEl.textContent = "Encryption failed.";
-          outEl.textContent = "Encryption or network error.";
-        } finally {
-          btn.disabled = false;
-        }
-      });
-    </script>
-  </body>
+		  const json = await res.json().catch(() => ({}));
+		  if (res.ok && json.ok) {
+			outEl.innerHTML = `Mode: ${json.mode}<br>Transformed: ${json.transformed}`;
+		  } else {
+			outEl.textContent = json.error || "Error from API.";
+		  }
+		} catch (err) {
+		  console.error(err);
+		  encEl.textContent = "Encryption failed.";
+		  outEl.textContent = "Encryption or network error.";
+		} finally {
+		  btn.disabled = false;
+		}
+	  });
+	</script>
+</body>
 </html>
