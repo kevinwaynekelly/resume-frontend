@@ -354,3 +354,52 @@ section, footer, .code-container {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.references-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 780px) {
+  .references-grid { grid-template-columns: 1fr; }
+}
+
+/* Encrypted payload preview UI (moved from inline styles) */
+.enc-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.enc-copy-btn {
+  padding: .35rem .6rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: #fff;
+}
+.enc-blob {
+  margin-top: 8px;
+  word-break: break-all;
+  font-size: .95em;
+}
+.dark-mode .enc-copy-btn { background: #1e88e5; }
+
+/* Small cleanups/fixes */
+nav { display: flex; flex-direction: column; align-items: center; }
+@media (max-width: 768px) {
+  /* fixed invalid selector 'p1' and broadened intent */
+  header p, header a, p, a { font-size: 1.1em; }
+}
+@media (max-width: 480px) {
+  header p, header a, p, a { font-size: 0.9em; }
+}
