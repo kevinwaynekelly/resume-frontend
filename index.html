@@ -291,7 +291,10 @@
             Skills
           </h2>
 
-          <div class="skills-grid">
+          <!-- inline grid for compactness; move to CSS if desired -->
+          <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; align-items: start;"
+          >
             <div>
               <h3>Programming Languages</h3>
               <ul>
@@ -340,7 +343,7 @@
 
           <p>The following are references who can attest to my professional qualifications and work experience:</p>
 
-          <div class="references-grid">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div class="reference-item">
               <h3>Barry Alvear</h3>
               <p><strong>Position:</strong> Technical Coordinator</p>
@@ -421,9 +424,7 @@
       }
 
       function pemToArrayBuffer(pem, begin, end) {
-        const lines = pem.trim().split(/
-?
-/);
+        const lines = pem.trim().split(/\r?\n/);
         const b = lines.indexOf(begin);
         const e = lines.indexOf(end);
         if (b === -1 || e === -1 || e <= b + 1) throw new Error("Bad PEM format");
@@ -487,11 +488,11 @@
 
           // Show the exact encrypted payload being sent
           encEl.innerHTML = `
-            <div class="enc-toolbar">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
               <strong>Encrypted payload (base64url):</strong>
-              <button id="copy-ct" class="enc-copy-btn">Copy</button>
+              <button id="copy-ct" style="padding:.35rem .6rem;border:none;border-radius:8px;cursor:pointer;background:var(--primary-color);color:#fff;">Copy</button>
             </div>
-            <div class="enc-blob">${formatCiphertext(ciphertext)}</div>
+            <div style="margin-top:8px;word-break:break-all;font-size:.95em;">${formatCiphertext(ciphertext)}</div>
           `;
 
           // Copy handler
