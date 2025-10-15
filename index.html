@@ -344,53 +344,34 @@
     });
 	</script>
 	<script>
-		function setResult(id, text) {
-		  const el = document.getElementById(id);
-		  if (!el) return;
-		  el.style.opacity = 0;
-		  el.textContent = text;
-		  requestAnimationFrame(() => {
-			el.style.transition = "opacity 0.3s ease";
-			el.style.opacity = 1;
-		  });
-		}
-
-		const results = {
-		  "demo-fingerprint": `Public key fingerprint: ${fingerprintHex.slice(0, 16)}…`,
-		  "demo-keyinfo":     "Algorithm: RSA-OAEP (SHA-256, 2048-bit)",
-		  "demo-verification": "Proxy token and origin validated ✓",
-		  "demo-latency":     `Round-trip latency: ${(t1 - t0).toFixed(1)} ms`,
-		  "demo-colo":        `Served from: ${response.headers.get("cf-ray")?.split("-")[1] ?? "N/A"}`
-		};
-
-		Object.entries(results).forEach(([id, text]) => setResult(id, text));
-	</script>
-	<script>
 	  // ====== Config ======
 	  const API_URL = "/api";
-	  const PUBLIC_KEY_URL = "/keys/public.pem"; // serve your SPKI public key here
+	  const PUBLIC_KEY_URL = "/keys/public.pem";
 
-	  // ====== DOM helpers ======
+	  // ====== DOM ======
 	  const $ = (id) => document.getElementById(id);
 	  const textEl = $("demo-text");
 	  const modeEl = $("demo-mode");
 	  const outEl  = $("demo-out");
 	  const btn    = $("demo-send");
-	  const encEl  = $("demo-encrypted"); // <- new box to show ciphertext
+	  const encEl  = $("demo-encrypted");
+
+	  const setResult = (id, text) => { const el = $(id); if (el) el.textContent = text; };
+
+	  // ====== Crypto state ======
+	  let cachedPublicKey = null;
+	  let keyFingerprintHex = null;
 
 	  // ====== Crypto helpers ======
-	  let cachedPublicKey = null;
-
 	  async function fetchPublicKeyPem() {
 		const res = await fetch(PUBLIC_KEY_URL, { cache: "reload" });
 		if (!res.ok) throw new Error("Failed to fetch public key");
-	      return await res.text();
-      }
+		return res.text();
+	  }
 
 	  function pemToArrayBuffer(pem, begin, end) {
 		const lines = pem.trim().split(/\r?\n/);
-		const b = lines.indexOf(begin);
-		const e = lines.indexOf(end);
+		const b = lines.indexOf(begin), e = lines.indexOf(end);
 		if (b === -1 || e === -1 || e <= b + 1) throw new Error("Bad PEM format");
 		const base64 = lines.slice(b + 1, e).join("");
 		const bin = atob(base64);
@@ -401,87 +382,81 @@
 
 	  async function importPublicKeyFromPem(pemText) {
 		const spki = pemToArrayBuffer(pemText, "-----BEGIN PUBLIC KEY-----", "-----END PUBLIC KEY-----");
-		return crypto.subtle.importKey(
-		  "spki",
-		  spki,
-		  { name: "RSA-OAEP", hash: "SHA-256" },
-		  false,
-		  ["encrypt"]
-		);
+		return crypto.subtle.importKey("spki", spki, { name: "RSA-OAEP", hash: "SHA-256" }, false, ["encrypt"]);
+	  }
+
+	  async function getPublicKeyFingerprint(pemText) {
+		const base64 = pemText.replace(/-----BEGIN PUBLIC KEY-----/,"").replace(/-----END PUBLIC KEY-----/,"").replace(/\s+/g,"");
+		const raw = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+		const digest = await crypto.subtle.digest("SHA-256", raw);
+		return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2,"0")).join("");
+	  }
+
+	  async function loadKey() {
+		if (cachedPublicKey && keyFingerprintHex) return;
+		const pem = await fetchPublicKeyPem();
+		keyFingerprintHex = await getPublicKeyFingerprint(pem);
+		cachedPublicKey = await importPublicKeyFromPem(pem);
 	  }
 
 	  function toBase64url(bytes) {
 		const b64 = btoa(String.fromCharCode(...bytes));
-		return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/,"");
+		return b64.replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 	  }
 
 	  async function encryptPayload(obj) {
-		if (!cachedPublicKey) {
-		  const pem = await fetchPublicKeyPem();
-		  cachedPublicKey = await importPublicKeyFromPem(pem);
-		}
+		await loadKey();
 		const data = new TextEncoder().encode(JSON.stringify(obj));
 		const ct = await crypto.subtle.encrypt({ name: "RSA-OAEP" }, cachedPublicKey, data);
 		return toBase64url(new Uint8Array(ct));
 	  }
 
-	  // Small helper to make long strings readable
-	  function formatCiphertext(str) {
-		const preview = str.length > 160 ? str.slice(0,160) + "… (" + str.length + " chars)" : str;
-		return preview;
-	  }
-	  async function copy(text) {
-		try { await navigator.clipboard.writeText(text); return true; } catch { return false; }
-	  }
+	  const preview = (s) => s.length > 160 ? `${s.slice(0,160)}… (${s.length} chars)` : s;
 
 	  // ====== UI wiring ======
 	  btn.addEventListener("click", async () => {
 		const text = (textEl.value || "").trim();
 		const mode = modeEl.value;
-		if (!text) { outEl.textContent = "Please enter some text."; return; }
+		if (!text) { setResult("demo-out","Please enter some text."); return; }
 
 		btn.disabled = true;
-		outEl.textContent = "Working…";
-		encEl.textContent = "Encrypting…";
+		setResult("demo-out","Working…");
+		setResult("demo-encrypted","Encrypting…");
 
 		try {
-		  // Encrypt on the client
+		  // Client-side encrypt
 		  const ciphertext = await encryptPayload({ text, mode });
+		  setResult("demo-encrypted", "Encrypted: " + preview(ciphertext));
 
-		  // Show the exact encrypted payload being sent
-		  encEl.innerHTML = `
-			<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-			  <strong>Encrypted payload (base64url):</strong>
-			  <button id="copy-ct" style="padding:.35rem .6rem;border:none;border-radius:8px;cursor:pointer;background:var(--primary-color);color:#fff;">
-				Copy
-			  </button>
-			</div>
-			<div style="margin-top:8px;word-break:break-all;font-size:.95em;">${formatCiphertext(ciphertext)}</div>
-		  `;
-		  // Copy handler
-		  $("copy-ct")?.addEventListener("click", async () => {
-			const ok = await copy(ciphertext);
-			$("copy-ct").textContent = ok ? "Copied!" : "Copy failed";
-			setTimeout(() => ($("copy-ct").textContent = "Copy"), 1200);
-		  });
-
-		  // Send encrypted blob to your Worker
+		  // Send to proxy → Worker
+		  const t0 = performance.now();
 		  const res = await fetch(API_URL, {
-		    method: "POST",
-		    headers: { "Content-Type": "application/json" },
-		    body: JSON.stringify({ ciphertext })
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ ciphertext })
 		  });
+		  const t1 = performance.now();
 
 		  const json = await res.json().catch(() => ({}));
 		  if (res.ok && json.ok) {
-			outEl.innerHTML = `Mode: ${json.mode}<br>Transformed: ${json.transformed}`;
+			setResult("demo-out", `Mode: ${json.mode}, Transformed: ${json.transformed}`);
+			setResult("demo-verification", "Proxy token and origin validated ✓");
 		  } else {
-			outEl.textContent = json.error || "Error from API.";
+			setResult("demo-out", json.error || "Error from API.");
+			setResult("demo-verification", "Validation failed ✗");
 		  }
+
+		  // Telemetry / interesting bits
+		  setResult("demo-fingerprint", `Public key fingerprint: ${keyFingerprintHex.slice(0,16)}…`);
+		  setResult("demo-keyinfo", "Algorithm: RSA-OAEP (SHA-256, 2048-bit)");
+		  setResult("demo-latency", `Round-trip latency: ${(t1 - t0).toFixed(1)} ms`);
+		  const colo = (res.headers.get("cf-ray") || "").split("-")[1] || "N/A";
+		  setResult("demo-colo", `Served from: ${colo}`);
+
 		} catch (err) {
 		  console.error(err);
-		  encEl.textContent = "Encryption failed.";
-		  outEl.textContent = "Encryption or network error.";
+		  setResult("demo-encrypted","Encryption failed.");
+		  setResult("demo-out","Encryption or network error.");
 		} finally {
 		  btn.disabled = false;
 		}
