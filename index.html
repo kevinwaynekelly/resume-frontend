@@ -433,11 +433,16 @@
 		  });
 
 		  // Send encrypted blob to your Worker
+		  const API_TOKEN = "feCkH0uUZJmJOm6o57McsxUezXGxYik6UZMGCOvydge4X7IBFKfG2NW23wf9M3UOVdDLZZcxGwP9DxawpLtJY4jcjYHyfYvScsVuGyk6eeK6mdAzC3mbpqZljK09KNM2ge2PblTqOrLXkThAdM7lXD072tUjaheaYj2EKEfLt4qP1luvZgiPvTYnnk50RfzNGKshOLxkOlHhDOtMsb6Sr44w3VcI8tlbcOLnzjvw3ygmcL6nQQBMT2udEuMZjz9x";
 		  const res = await fetch(API_URL, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ ciphertext })
+		    method: "POST",
+		    headers: {
+			  "Content-Type": "application/json",
+			  "X-Client-Token": API_TOKEN
+		    },
+		    body: JSON.stringify({ ciphertext })
 		  });
+
 
 		  const json = await res.json().catch(() => ({}));
 		  if (res.ok && json.ok) {
