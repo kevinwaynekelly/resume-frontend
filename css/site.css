@@ -355,30 +355,9 @@ section, footer, .code-container {
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
 
-/* API demo: make results look like normal paragraph text */
-#api-demo .results-grid {
-  display: block;
-  padding: 0;
-  margin-top: .5rem;
-  gap: 0;
-}
-#api-demo .results-grid .result {
-  background: none;
-  border: 0;
-  padding: 0;
-  margin: .35rem 0;
+#api-demo {
   color: var(--text, #0f172a);
   font-size: 1rem;
   line-height: 1.6;
-  box-shadow: none;
-  border-radius: 0;
-}
-/* muted secondary lines */
-#api-demo .results-grid .result.secondary {
-  opacity: .8;
-}
-#api-demo .results-grid .result.code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-  word-break: break-all;
-  opacity: .9;
+  margin-top: 0.75rem;
 }
