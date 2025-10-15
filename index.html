@@ -349,12 +349,10 @@
 	  let cachedPublicKey = null;
 
 	  async function fetchPublicKeyPem() {
-		const res = await fetch(API_URL, {
-		  method: "POST",
-		  headers: { "Content-Type": "application/json" },
-		  body: JSON.stringify({ ciphertext })
-		});
-	  }
+		const res = await fetch(PUBLIC_KEY_URL, { cache: "reload" });
+		if (!res.ok) throw new Error("Failed to fetch public key");
+	      return await res.text();
+      }
 
 	  function pemToArrayBuffer(pem, begin, end) {
 		const lines = pem.trim().split(/\r?\n/);
