@@ -1,17 +1,26 @@
-// /functions/api/[[path]].ts
 export const onRequest: PagesFunction<{
-  UPSTREAM_URL: string,      // example: "https://api.kevinwaynekelly.com"
-  CLIENT_TOKEN: string,      // same value as the Worker's CLIENT_TOKEN secret
-  ALLOWED_ORIGIN: string     // example: "https://resume.kevinwaynekelly.com"
+  UPSTREAM_URL: string;
+  CLIENT_TOKEN: string;
+  ALLOWED_ORIGIN: string;
 }> = async (ctx) => {
   const { request, env } = ctx;
+
+  // Guard: required envs
+  if (!env.UPSTREAM_URL || !/^https?:\/\//i.test(env.UPSTREAM_URL)) {
+    return new Response("Misconfigured UPSTREAM_URL", { status: 500 });
+  }
+  if (!env.CLIENT_TOKEN) {
+    return new Response("Missing CLIENT_TOKEN (Pages env)", { status: 500 });
+  }
+  if (!env.ALLOWED_ORIGIN) {
+    return new Response("Missing ALLOWED_ORIGIN (Pages env)", { status: 500 });
+  }
+
   const reqUrl = new URL(request.url);
 
-  // Build upstream URL. Everything after /api goes to the Worker.
-  const upstreamBase = new URL(env.UPSTREAM_URL);
-  // Keep query string
+  // Build upstream URL robustly
   const pathAfterApi = reqUrl.pathname.replace(/^\/api\/?/, "");
-  const upstreamUrl = new URL(upstreamBase.toString());
+  const upstreamUrl = new URL(env.UPSTREAM_URL);
   upstreamUrl.pathname = pathAfterApi ? `/${pathAfterApi}` : "/";
   upstreamUrl.search = reqUrl.search;
 
@@ -19,15 +28,12 @@ export const onRequest: PagesFunction<{
   const fwdHeaders = new Headers(request.headers);
   fwdHeaders.set("X-Client-Token", env.CLIENT_TOKEN);
   fwdHeaders.set("Origin", env.ALLOWED_ORIGIN);
-
-  // Do not leak browser cookies or irrelevant headers upstream
   fwdHeaders.delete("Cookie");
 
-  // Forward body for non-GET methods
   const method = request.method.toUpperCase();
-  const body = method === "GET" || method === "HEAD" ? undefined : await request.arrayBuffer();
+  const body =
+    method === "GET" || method === "HEAD" ? undefined : await request.arrayBuffer();
 
-  // Preflight response, useful if you ever call from another subdomain
   if (method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -41,22 +47,24 @@ export const onRequest: PagesFunction<{
     });
   }
 
-  // Call your Worker
-  const upstreamResp = await fetch(upstreamUrl.toString(), {
-    method,
-    headers: fwdHeaders,
-    body,
-    redirect: "manual",
-  });
+  try {
+    const upstreamResp = await fetch(upstreamUrl.toString(), {
+      method,
+      headers: fwdHeaders,
+      body,
+      redirect: "manual",
+    });
 
-  // Pass through response body, normalize CORS for your page origin
-  const buf = await upstreamResp.arrayBuffer();
-  const outHeaders = new Headers(upstreamResp.headers);
-  outHeaders.set("Access-Control-Allow-Origin", reqUrl.origin);
-  outHeaders.set("Vary", "Origin");
-  // Optional hardening for the browser response
-  outHeaders.set("X-Content-Type-Options", "nosniff");
-  outHeaders.set("Cache-Control", "no-store");
+    const buf = await upstreamResp.arrayBuffer();
+    const outHeaders = new Headers(upstreamResp.headers);
+    outHeaders.set("Access-Control-Allow-Origin", reqUrl.origin);
+    outHeaders.set("Vary", "Origin");
+    outHeaders.set("X-Content-Type-Options", "nosniff");
+    outHeaders.set("Cache-Control", "no-store");
 
-  return new Response(buf, { status: upstreamResp.status, headers: outHeaders });
+    return new Response(buf, { status: upstreamResp.status, headers: outHeaders });
+  } catch (e) {
+    // Network or URL construction error
+    return new Response("Proxy fetch failed", { status: 502 });
+  }
 };
