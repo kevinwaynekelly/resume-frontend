@@ -56,9 +56,12 @@
 		<section id="api-demo">
 		  <h2>
 			<i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
-			<span class="sr-only">API and Encryption Demo</span>
-			API & Encryption Demo
+			<span class="sr-only">Encrypted and Verified Data Pipeline Demo</span>
+			Encrypted and Verified Data Pipeline Demo
 		  </h2>
+		  <p class="sub-info">
+		    Client-side RSA-OAEP encryption over HTTPS, proxied by Cloudflare Pages Functions that add signed authentication headers and enforce origin, then decrypted by a Cloudflare Worker with the private key, providing end-to-end confidentiality, integrity, and domain-scoped trust.
+		  </p>
 		  <div class="grid">
 			<label>
 			  <span>Your text</span>
@@ -75,8 +78,16 @@
 			</label>
 			<button id="demo-send">Send to API</button>
 		  </div>
-		  <div class="result" id="demo-out">—</div>
-		  <div class="result" id="demo-encrypted">—</div>
+		  <div class="results-grid">
+		    <div class="result" id="demo-out"></div>
+		    <div class="result" id="demo-encrypted"></div>
+		    <div class="result" id="demo-keyinfo"></div>
+		    <div class="result" id="demo-verification"></div>
+		    <div class="result" id="demo-fingerprint"></div>
+		    <div class="result" id="demo-latency"></div>
+		    <div class="result" id="demo-colo"></div>
+		  </div>
+
 		</section>
 		<section id="education">
 			<h2><i class="fas fa-graduation-cap"></i> Education</h2>
@@ -331,6 +342,28 @@
     document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("copyright-year").textContent = new Date().getFullYear();
     });
+	</script>
+	<script>
+		function setResult(id, text) {
+		  const el = document.getElementById(id);
+		  if (!el) return;
+		  el.style.opacity = 0;
+		  el.textContent = text;
+		  requestAnimationFrame(() => {
+			el.style.transition = "opacity 0.3s ease";
+			el.style.opacity = 1;
+		  });
+		}
+
+		const results = {
+		  "demo-fingerprint": `Public key fingerprint: ${fingerprintHex.slice(0, 16)}…`,
+		  "demo-keyinfo":     "Algorithm: RSA-OAEP (SHA-256, 2048-bit)",
+		  "demo-verification": "Proxy token and origin validated ✓",
+		  "demo-latency":     `Round-trip latency: ${(t1 - t0).toFixed(1)} ms`,
+		  "demo-colo":        `Served from: ${response.headers.get("cf-ray")?.split("-")[1] ?? "N/A"}`
+		};
+
+		Object.entries(results).forEach(([id, text]) => setResult(id, text));
 	</script>
 	<script>
 	  // ====== Config ======
