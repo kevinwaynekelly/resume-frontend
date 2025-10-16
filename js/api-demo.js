@@ -111,8 +111,8 @@ btn.addEventListener("click", async () => {
 	const summaryLines = [
 	  `Transformed: ${json.transformed}`,
 	  `Mode: ${json.mode}`,
-	  `Ciphertext: ${ciphertext.slice(0, 64)}… (${ciphertext.length} chars)`,
-	  `Key Fingerprint: ${keyFingerprintHex.slice(0, 64)}…`,
+	  `Ciphertext: ${ciphertext.slice(0, 128)}… (${ciphertext.length} chars)`,
+	  `Key Fingerprint: ${keyFingerprintHex.slice(0, 128)}… (${keyFingerprintHex.length} chars)`,
 	  json.ok ? "Origin & Token: verified" : "Origin & Token: failed",
 	  `Round-trip Time: ${(t1 - t0).toFixed(1)} ms`,
 	  `Colocation: ${colo}`

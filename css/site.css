@@ -398,3 +398,13 @@ section, footer, .code-container {
   border: 1px solid var(--border-color);
   box-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
+
+#api-demo .kv { grid-template-columns: 160px minmax(0, 1fr); }
+
+#api-demo .kv code,
+#api-demo .kv .wrap {
+  display: inline;            
+  white-space: normal;           
+  overflow-wrap: anywhere;  
+  word-break: break-word;
+}
