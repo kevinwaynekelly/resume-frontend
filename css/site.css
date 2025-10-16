@@ -355,17 +355,37 @@ section, footer, .code-container {
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
 
-#api-demo #demo-summary {
-  white-space: pre-line;
-  word-break: break-word;
+/* Dark summary panel like the old bars, but readable text */
+#api-demo .summary-panel--dark {
   margin-top: .75rem;
-  font-style: normal;
+  padding: 14px 16px;
+  background: #0c1a2b;           /* deep navy */
+  color: #e6edf7;                /* light text */
+  border: 1px solid #0a1422;     /* subtle edge */
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.18);
 }
 
-#api-demo .summary-panel {
-  margin-top: .75rem;
-  padding: 12px 14px;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
+/* Paragraph-like typography (no italics) */
+#api-demo .summary-panel--dark pre {
+  margin: 0;
+  white-space: pre-wrap;         /* keep \n as line breaks and wrap long lines */
+  word-break: break-word;
+  font: 400 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  letter-spacing: 0.1px;
+}
+
+/* Optional: make labels pop a bit without screaming */
+#api-demo .summary-panel--dark pre b {
+  font-weight: 600;
+  color: #f3f6fb;
+}
+
+#api-demo .sub-info {
+  font-style: normal;
+  color: var(--text, #0f172a);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
