@@ -408,3 +408,22 @@ section, footer, .code-container {
   overflow-wrap: anywhere;  
   word-break: break-word;
 }
+
+#api-demo .summary-panel--dark code,
+#api-demo #demo-summary code {
+  white-space: normal !important;   /* allow wrapping */
+  word-break: break-word !important; /* force breaks on long tokens */
+  overflow-wrap: anywhere;          /* modern browsers */
+  line-break: anywhere;
+  display: inline-block;
+  max-width: 100%;
+}
+
+#api-demo .kv {
+  grid-template-columns: 150px minmax(0, 1fr);
+}
+
+#api-demo .summary-panel--dark code {
+  padding-right: 4px;
+  word-spacing: 0.1ch;
+}
