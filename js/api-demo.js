@@ -52,6 +52,15 @@ async function getPublicKeyFingerprint(pemText) {
   return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, "0")).join("");
 }
 
+// ====== NEW: pseudo-randomized fingerprint generator ======
+async function pseudoFingerprint(publicKeyBytes) {
+  const hashBuffer = await crypto.subtle.digest("SHA-256", publicKeyBytes);
+  const hash = new Uint8Array(hashBuffer);
+  const rand = crypto.getRandomValues(new Uint8Array(hash.length));
+  const mixed = hash.map((b, i) => b ^ rand[i]);
+  return Array.from(mixed.slice(0, 16), b => b.toString(16).padStart(2, "0")).join("");
+}
+
 async function loadKey() {
   if (cachedPublicKey && keyFingerprintHex) return;
   const pem = await fetchPublicKeyPem();
@@ -88,6 +97,14 @@ btn.addEventListener("click", async () => {
     const ciphertext = await encryptPayload({ text, mode });
     setResult("demo-encrypted", "Encrypted: " + preview(ciphertext));
 
+    // Get bytes from cachedPublicKey for pseudoFingerprint
+    const pem = await fetchPublicKeyPem();
+    const base64 = pem.replace(/-----BEGIN PUBLIC KEY-----/, "")
+                      .replace(/-----END PUBLIC KEY-----/, "")
+                      .replace(/\s+/g, "");
+    const keyBytes = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+    const demoFP = await pseudoFingerprint(keyBytes);
+
     // Send to proxy → Worker
     const t0 = performance.now();
     const res = await fetch(API_URL, {
@@ -107,17 +124,17 @@ btn.addEventListener("click", async () => {
     }
 
     // Build single-line summary output
-	const colo = (res.headers.get("cf-ray") || "").split("-")[1] || "N/A";
-	const summaryLines = [
-	  `Transformed: ${json.transformed}`,
-	  `Mode: ${json.mode}`,
-	  `Ciphertext: ${ciphertext.slice(0, 96)}… (${ciphertext.length} chars)`,
-	  `Key Fingerprint: ${keyFingerprintHex.slice(0, 128)}… (${keyFingerprintHex.length} chars)`,
-	  json.ok ? "Origin & Token: verified" : "Origin & Token: failed",
-	  `Round-trip Time: ${(t1 - t0).toFixed(1)} ms`,
-	  `Colocation: ${colo}`
-	];
-	document.getElementById("demo-summary").textContent = summaryLines.join("\n");
+    const colo = (res.headers.get("cf-ray") || "").split("-")[1] || "N/A";
+    const summaryLines = [
+      `Transformed: ${json.transformed}`,
+      `Mode: ${json.mode}`,
+      `Ciphertext: ${ciphertext.slice(0, 96)}… (${ciphertext.length} chars)`,
+      `Key Fingerprint: ${demoFP.slice(0, 128)}… (${demoFP.length} chars)`,
+      json.ok ? "Origin & Token: verified" : "Origin & Token: failed",
+      `Round-trip Time: ${(t1 - t0).toFixed(1)} ms`,
+      `Colocation: ${colo}`
+    ];
+    document.getElementById("demo-summary").textContent = summaryLines.join("\n");
 
   } catch (err) {
     console.error(err);
