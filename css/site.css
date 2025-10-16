@@ -716,3 +716,58 @@ section, footer, .code-container {
   padding: .7rem;
   font-size: 1rem;
 }
+
+/* Match API demo section text style to the rest of the resume */
+#api-demo .sub-info {
+  font-size: 1.0625rem; /* same as global <p> */
+  color: var(--text-color);
+  line-height: 1.7;
+  margin: 0.75rem 0 1.25rem 0;
+}
+
+#api-demo {
+  padding: var(--container-padding);
+}
+
+.dark-mode #api-demo .sub-info {
+  color: var(--muted-text);
+}
+
+/* Match API demo section title to Professional Summary heading */
+#api-demo h2 {
+  font-size: 2rem;                /* same as .section headings */
+  font-weight: 700;
+  color: var(--primary-color);
+  border-bottom: 4px solid var(--primary-color);
+  padding-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+/* Match dark mode heading style */
+.dark-mode #api-demo h2 {
+  color: var(--secondary-color);
+  border-bottom: 4px solid var(--secondary-color);
+}
+
+/* Standardize heading icons (across all sections) */
+h2 i {
+  margin-right: 10px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px; /* optical alignment tweak */
+  font-size: 1.2em;
+  color: var(--primary-color);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Match hover style globally */
+h2:hover i {
+  transform: scale(1.1);
+  color: var(--secondary-color);
+}
+
+/* Ensure dark mode keeps it crisp */
+.dark-mode h2 i {
+  color: var(--secondary-color);
+}
