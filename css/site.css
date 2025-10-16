@@ -848,3 +848,8 @@ section p,
     font-size: 0.9em !important;
   }
 }
+
+.dark-mode #api-demo p,
+.dark-mode #api-demo .sub-info {
+  color: rgb(224, 224, 224) !important;
+}
