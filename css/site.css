@@ -427,3 +427,32 @@ section, footer, .code-container {
   padding-right: 4px;
   word-spacing: 0.1ch;
 }
+
+#api-demo .summary-panel--dark code,
+#api-demo #demo-summary code {
+  display: block;                  /* allow full-width wrapping */
+  white-space: pre-wrap !important;/* preserve newlines but wrap long lines */
+  overflow-wrap: anywhere !important;
+  word-break: break-all !important;
+  line-break: anywhere;
+  background: none;                /* remove inline block background bleed */
+  color: var(--text-color);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  padding: 2px 0;
+  max-width: 100%;
+  text-wrap: wrap;                 /* new spec-compatible rule */
+}
+
+#api-demo .summary-panel--dark {
+  background: var(--white);
+  color: var(--text-color);
+  border-radius: 10px;
+  padding: 1rem;
+  line-height: 1.6;
+  font-size: 0.97rem;
+}
+.dark-mode #api-demo .summary-panel--dark {
+  background: #0b1020;
+  color: #e5e7eb;
+  border: 1px solid var(--border-color);
+}
