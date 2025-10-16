@@ -156,7 +156,7 @@ btn.addEventListener("click", async () => {
       `Transformed: ${json.transformed}`,
       `Mode: ${json.mode}`,
       `Ciphertext: ${ciphertext.slice(0, 96)}… (${ciphertext.length} chars)`,
-      `Key Fingerprint: ${demoFP.slice(0, 128)}… (${demoFP.length} chars)`,
+      `Key Fingerprint: ${demoFP.slice(0, 128)} (${demoFP.length} chars)`,
       json.ok ? "Origin & Token: verified" : "Origin & Token: failed",
       `Round-trip Time: ${(t1 - t0).toFixed(1)} ms`,
       `Colocation: ${colo}`,
