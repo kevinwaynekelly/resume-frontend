@@ -456,3 +456,11 @@ section, footer, .code-container {
   color: #e5e7eb;
   border: 1px solid var(--border-color);
 }
+
+#api-demo #demo-summary {
+  white-space: pre-wrap !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  line-break: anywhere;
+  max-width: 100%;
+}
