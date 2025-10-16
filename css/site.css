@@ -658,3 +658,56 @@ section, footer, .code-container {
     width: 0.85em;
   }
 }
+
+/* --- API Demo: inherit global typography so it scales like the rest --- */
+
+/* 1) Kill fixed sizes in the demo; inherit from section/body */
+#api-demo,
+#api-demo * {
+  font-size: inherit;
+}
+
+/* 2) Description under the H2 = normal paragraph sizing */
+#api-demo .sub-info {
+  font-style: normal;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* 3) Inputs/buttons use em so they scale with global font size */
+#api-demo input,
+#api-demo select,
+#api-demo button {
+  font-size: inherit;         /* was 1rem */
+  padding: .7em;              /* was .7rem */
+}
+
+/* 4) Summary panel + grid: inherit, not fixed */
+#api-demo .summary-panel--dark {
+  font-size: inherit;         /* was 0.97rem */
+  line-height: 1.6;
+}
+
+#api-demo .kv {
+  /* keep layout, let text scale */
+  display: grid;
+  grid-template-columns: 150px minmax(0,1fr);
+  gap: 8px 14px;
+  font-size: inherit;         /* was 0.95rem */
+}
+
+/* 5) Monospace bits slightly smaller than body for balance */
+#api-demo code {
+  font-size: .95em;           /* relative to inherited size */
+}
+
+/* 6) Mobile spacing tweaks (use your existing breakpoints) */
+@media (max-width: 768px) {
+  #api-demo .summary-panel--dark { padding: .9rem 1rem; }
+  #api-demo .kv { gap: 6px 10px; grid-template-columns: 120px minmax(0,1fr); }
+}
+
+@media (max-width: 480px) {
+  #api-demo .summary-panel--dark { padding: .8rem .9rem; }
+  #api-demo .kv { grid-template-columns: 110px minmax(0,1fr); }
+}
