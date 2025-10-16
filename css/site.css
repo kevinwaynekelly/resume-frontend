@@ -355,9 +355,17 @@ section, footer, .code-container {
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
 
-#api-demo {
-  color: var(--text, #0f172a);
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-top: 0.75rem;
+#api-demo #demo-summary {
+  white-space: pre-line;
+  word-break: break-word;
+  margin-top: .75rem;
+  font-style: normal;
+}
+
+#api-demo .summary-panel {
+  margin-top: .75rem;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
 }

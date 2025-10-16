@@ -108,19 +108,16 @@ btn.addEventListener("click", async () => {
 
     // Build single-line summary output
 	const colo = (res.headers.get("cf-ray") || "").split("-")[1] || "N/A";
-	const summary = [
+	const summaryLines = [
 	  `Transformed: ${json.transformed}`,
 	  `Mode: ${json.mode}`,
-	  `Ciphertext: ${ciphertext.slice(0, 32)}… (${ciphertext.length} chars)`,
+	  `Ciphertext: ${ciphertext.slice(0, 64)}… (${ciphertext.length} chars)`,
 	  `Key FP: ${keyFingerprintHex.slice(0, 16)}…`,
-	  `Origin + token verified`,
+	  json.ok ? "Origin + token: verified ✓" : "Origin + token: failed ✗",
 	  `RTT: ${(t1 - t0).toFixed(1)} ms`,
 	  `Colo: ${colo}`
-	].join(" · ");
-
-	// Output the summary line
-	setResult("demo-summary", summary);
-
+	];
+	document.getElementById("demo-summary").textContent = summaryLines.join("\n");
 
   } catch (err) {
     console.error(err);
