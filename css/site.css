@@ -711,3 +711,8 @@ section, footer, .code-container {
   #api-demo .summary-panel--dark { padding: .8rem .9rem; }
   #api-demo .kv { grid-template-columns: 110px minmax(0,1fr); }
 }
+
+#api-demo input, #api-demo select, #api-demo button {
+  padding: .7rem;
+  font-size: 1rem;
+}
