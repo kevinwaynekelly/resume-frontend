@@ -99,7 +99,7 @@ btn.addEventListener("click", async () => {
 
     const json = await res.json().catch(() => ({}));
     if (res.ok && json.ok) {
-      setResult("demo-out", `Mode: ${json.mode}, Transformed: ${json.transformed}`);
+      setResult("demo-out", `Mode: ${json.mode}, Transformed text: ${json.transformed}`);
       setResult("demo-verification", "Proxy token and origin validated ✓");
     } else {
       setResult("demo-out", json.error || "Error from API.");
@@ -112,10 +112,10 @@ btn.addEventListener("click", async () => {
 	  `Transformed: ${json.transformed}`,
 	  `Mode: ${json.mode}`,
 	  `Ciphertext: ${ciphertext.slice(0, 64)}… (${ciphertext.length} chars)`,
-	  `Key FP: ${keyFingerprintHex.slice(0, 16)}…`,
-	  json.ok ? "Origin + token: verified ✓" : "Origin + token: failed ✗",
-	  `RTT: ${(t1 - t0).toFixed(1)} ms`,
-	  `Colo: ${colo}`
+	  `Key Fingerprint: ${keyFingerprintHex.slice(0, 64)}…`,
+	  json.ok ? "Origin & Token: verified" : "Origin & Token: failed",
+	  `Round-trip Time: ${(t1 - t0).toFixed(1)} ms`,
+	  `Colocation: ${colo}`
 	];
 	document.getElementById("demo-summary").textContent = summaryLines.join("\n");
 
