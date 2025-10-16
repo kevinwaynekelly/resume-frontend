@@ -60,7 +60,7 @@
 			Encrypted and Verified Data Pipeline Demo
 		  </h2>
 		  <p class="sub-info">
-		    Client-side RSA-OAEP encryption over HTTPS, proxied by Cloudflare Pages Functions that add signed authentication headers and enforce origin, then decrypted by a Cloudflare Worker with the private key, providing end-to-end confidentiality, integrity, and domain-scoped trust.
+		    Data is encrypted in the browser using RSA-OAEP. It’s sent over HTTPS to a Cloudflare Pages Function, which adds signed headers and checks the request’s origin. The encrypted data is then passed to a Cloudflare Worker, where it's decrypted using a private key. This setup ensures end-to-end confidentiality, data integrity, and trust limited to the domain.
 		  </p>
 		  <div class="grid">
 			<label>
