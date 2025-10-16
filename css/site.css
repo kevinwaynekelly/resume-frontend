@@ -828,3 +828,31 @@ section h2:hover i {
     font-size: 1.1em;
   }
 }
+
+/* === Unify paragraph font scaling across all sections === */
+
+/* Default desktop */
+section p,
+#api-demo p,
+#api-demo .sub-info {
+  font-size: 1.0625rem !important;
+  line-height: 1.6;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  section p,
+  #api-demo p,
+  #api-demo .sub-info {
+    font-size: 0.96em !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  section p,
+  #api-demo p,
+  #api-demo .sub-info {
+    font-size: 0.9em !important;
+  }
+}
