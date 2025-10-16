@@ -279,6 +279,11 @@ header nav a i {
 h2 i {
   margin-right: 10px;
   transition: transform 0.3s ease, color 0.3s ease;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  font-size: 1.2em;
+  color: var(--primary-color);
 }
 
 h2:hover i {
@@ -288,9 +293,11 @@ h2:hover i {
 
 @keyframes pulse{
 
+
 	0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2); }
 	50% { transform: scale(1.1); box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2); }
 	100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2); }
+
 
 }
 
@@ -300,8 +307,10 @@ h2:hover i {
 
 @keyframes fadeIn{
 
+
 	0% { opacity: 0; transform: translateY(20px); }
 	100% { opacity: 1; transform: translateY(0); }
+
 
 }
 
@@ -480,10 +489,11 @@ section, footer, .code-container {
 #api-demo .sub-info {
   font-style: normal;
   color: var(--text-color);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.0625rem;
+  line-height: 1.7;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
+  margin: 0.75rem 0 1.25rem 0;
 }
 
 #api-demo input,
@@ -509,7 +519,7 @@ section, footer, .code-container {
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   line-height: 1.6;
-  font-size: 0.97rem;
+  font-size: inherit;
 }
 
 .dark-mode #api-demo .summary-panel--dark {
@@ -520,7 +530,10 @@ section, footer, .code-container {
 }
 
 #api-demo .kv {
-  grid-template-columns: 150px minmax(0, 1fr);
+  grid-template-columns: 150px minmax(0,1fr);
+  display: grid;
+  gap: 8px 14px;
+  font-size: inherit;
 }
 
 #api-demo .kv code,
@@ -557,6 +570,82 @@ section, footer, .code-container {
   word-break: break-word !important;
   line-break: anywhere;
   max-width: 100%;
+}
+
+#api-demo,
+#api-demo * {
+  font-size: inherit;
+}
+
+#api-demo code {
+  font-size: .95em;
+}
+
+#api-demo {
+  padding: var(--container-padding);
+}
+
+.dark-mode #api-demo .sub-info {
+  color: var(--muted-text);
+}
+
+#api-demo h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  border-bottom: 4px solid var(--primary-color);
+  padding-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.dark-mode #api-demo h2 {
+  color: var(--secondary-color);
+  border-bottom: 4px solid var(--secondary-color);
+}
+
+.dark-mode h2 i {
+  color: var(--secondary-color);
+}
+
+section h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  border-bottom: 4px solid var(--primary-color);
+  padding-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+section h2 i {
+  font-size: 1.35em;
+  color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+section h2:hover i {
+  color: var(--secondary-color);
+}
+
+.dark-mode section h2 {
+  color: var(--secondary-color);
+  border-bottom: 4px solid var(--secondary-color);
+}
+
+.dark-mode section h2 i {
+  color: var(--secondary-color);
+}
+
+section p,
+#api-demo p,
+#api-demo .sub-info {
+  font-size: 1.0625rem !important;
+  line-height: 1.6;
 }
 
 @media (max-width: 780px) {
@@ -659,162 +748,33 @@ section, footer, .code-container {
   }
 }
 
-/* --- API Demo: inherit global typography so it scales like the rest --- */
-
-/* 1) Kill fixed sizes in the demo; inherit from section/body */
-#api-demo,
-#api-demo * {
-  font-size: inherit;
-}
-
-/* 2) Description under the H2 = normal paragraph sizing */
-#api-demo .sub-info {
-  font-style: normal;
-  color: var(--text-color);
-  line-height: 1.6;
-}
-
-/* 3) Inputs/buttons use em so they scale with global font size */
-#api-demo input,
-#api-demo select,
-#api-demo button {
-  font-size: inherit;         /* was 1rem */
-  padding: .7em;              /* was .7rem */
-}
-
-/* 4) Summary panel + grid: inherit, not fixed */
-#api-demo .summary-panel--dark {
-  font-size: inherit;         /* was 0.97rem */
-  line-height: 1.6;
-}
-
-#api-demo .kv {
-  /* keep layout, let text scale */
-  display: grid;
-  grid-template-columns: 150px minmax(0,1fr);
-  gap: 8px 14px;
-  font-size: inherit;         /* was 0.95rem */
-}
-
-/* 5) Monospace bits slightly smaller than body for balance */
-#api-demo code {
-  font-size: .95em;           /* relative to inherited size */
-}
-
-/* 6) Mobile spacing tweaks (use your existing breakpoints) */
 @media (max-width: 768px) {
-  #api-demo .summary-panel--dark { padding: .9rem 1rem; }
-  #api-demo .kv { gap: 6px 10px; grid-template-columns: 120px minmax(0,1fr); }
+  #api-demo .summary-panel--dark {
+    padding: .9rem 1rem;
+  }
+  
+  #api-demo .kv {
+    gap: 6px 10px;
+    grid-template-columns: 120px minmax(0,1fr);
+  }
 }
 
 @media (max-width: 480px) {
-  #api-demo .summary-panel--dark { padding: .8rem .9rem; }
-  #api-demo .kv { grid-template-columns: 110px minmax(0,1fr); }
+  #api-demo .summary-panel--dark {
+    padding: .8rem .9rem;
+  }
+  
+  #api-demo .kv {
+    grid-template-columns: 110px minmax(0,1fr);
+  }
 }
 
-#api-demo input, #api-demo select, #api-demo button {
-  padding: .7rem;
-  font-size: 1rem;
-}
-
-/* Match API demo section text style to the rest of the resume */
-#api-demo .sub-info {
-  font-size: 1.0625rem; /* same as global <p> */
-  color: var(--text-color);
-  line-height: 1.7;
-  margin: 0.75rem 0 1.25rem 0;
-}
-
-#api-demo {
-  padding: var(--container-padding);
-}
-
-.dark-mode #api-demo .sub-info {
-  color: var(--muted-text);
-}
-
-/* Match API demo section title to Professional Summary heading */
-#api-demo h2 {
-  font-size: 2rem;                /* same as .section headings */
-  font-weight: 700;
-  color: var(--primary-color);
-  border-bottom: 4px solid var(--primary-color);
-  padding-bottom: 10px;
-  margin-top: 5px;
-  margin-bottom: 20px;
-}
-
-/* Match dark mode heading style */
-.dark-mode #api-demo h2 {
-  color: var(--secondary-color);
-  border-bottom: 4px solid var(--secondary-color);
-}
-
-/* Standardize heading icons (across all sections) */
-h2 i {
-  margin-right: 10px;
-  vertical-align: middle;
-  position: relative;
-  top: -1px; /* optical alignment tweak */
-  font-size: 1.2em;
-  color: var(--primary-color);
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-/* Match hover style globally */
-h2:hover i {
-  transform: scale(1.1);
-  color: var(--secondary-color);
-}
-
-/* Ensure dark mode keeps it crisp */
-.dark-mode h2 i {
-  color: var(--secondary-color);
-}
-
-/* === UNIFIED SECTION HEADINGS (Perfect Match) === */
-section h2 {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  font-size: 2rem;              /* identical across sections */
-  font-weight: 700;
-  color: var(--primary-color);
-  border-bottom: 4px solid var(--primary-color);
-  padding-bottom: 10px;
-  margin-top: 5px;
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-section h2 i {
-  font-size: 1.35em;            /* uniform icon size */
-  color: var(--primary-color);
-  transform: translateY(-1px);
-}
-
-/* Hover accent */
-section h2:hover i {
-  color: var(--secondary-color);
-}
-
-/* === Dark mode identical styling === */
-.dark-mode section h2 {
-  color: var(--secondary-color);
-  border-bottom: 4px solid var(--secondary-color);
-}
-
-.dark-mode section h2 i {
-  color: var(--secondary-color);
-}
-
-/* === Responsive scaling (same for both sections) === */
 @media (max-width: 768px) {
   section h2 {
     font-size: 1.6rem;
     border-bottom-width: 3px;
   }
+  
   section h2 i {
     font-size: 1.2em;
   }
@@ -824,35 +784,24 @@ section h2:hover i {
   section h2 {
     font-size: 1.4rem;
   }
+  
   section h2 i {
     font-size: 1.1em;
   }
 }
 
-/* === Unify paragraph font scaling across all sections === */
-
-/* Default desktop */
-section p,
-#api-demo p,
-#api-demo .sub-info {
-  font-size: 1.0625rem !important;
-  line-height: 1.6;
-}
-
-/* Tablet */
 @media (max-width: 768px) {
   section p,
-  #api-demo p,
-  #api-demo .sub-info {
+    #api-demo p,
+    #api-demo .sub-info {
     font-size: 0.96em !important;
   }
 }
 
-/* Mobile */
 @media (max-width: 480px) {
   section p,
-  #api-demo p,
-  #api-demo .sub-info {
+    #api-demo p,
+    #api-demo .sub-info {
     font-size: 0.9em !important;
   }
 }
