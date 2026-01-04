@@ -72,7 +72,7 @@ a:hover { text-decoration: underline; text-underline-offset: 4px; }
 }
 
 /* =========================================
-   3. HEADER & HERO (Responsive Fix)
+   3. HEADER & HERO (Responsive Grid)
    ========================================= */
 header {
     margin-bottom: 4rem;
@@ -137,7 +137,7 @@ nav {
     gap: 1.5rem; 
     font-size: 1.5rem; 
     margin-top: 0.5rem;
-    flex-wrap: wrap; /* Allows icons to wrap if needed */
+    flex-wrap: wrap; 
 }
 
 /* MOBILE HEADER FIX: Stack vertically on phones */
@@ -229,7 +229,7 @@ article h3 { margin-top: 0; font-size: 1.25rem; }
     display: block;
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.75rem;
-    word-wrap: break-word; /* Prevent long location text from breaking */
+    word-wrap: break-word; 
 }
 
 article ul {
@@ -242,18 +242,18 @@ article ul {
 article li { margin-bottom: 0.75rem; }
 
 /* =========================================
-   6. TERMINAL DEMO
+   6. TERMINAL DEMO (With Text Wrap Fix)
    ========================================= */
 #api-demo {
     background: var(--term-bg);
     color: var(--term-text);
-    padding: 1.5rem; /* Reduced padding for mobile */
+    padding: 1.5rem; 
     border-radius: var(--radius);
     border: 1px solid #334155;
     font-family: 'Fira Code', monospace;
     position: relative;
     box-shadow: var(--shadow);
-    overflow: hidden; /* Contains child overflows */
+    overflow: hidden; 
 }
 
 #api-demo::before {
@@ -320,10 +320,14 @@ article li { margin-bottom: 0.75rem; }
     color: var(--term-success);
     padding: 1rem;
     margin-top: 2rem;
-    font-size: 0.85rem; /* Smaller font on mobile */
+    font-size: 0.85rem; 
     border-radius: 0 4px 4px 0;
-    white-space: pre-wrap; /* Allows text wrapping */
-    word-break: break-all; /* Prevents encrypted text overflow */
+    
+    /* THE FIX FOR LONG TEXT ON MOBILE */
+    white-space: pre-wrap;      
+    word-break: break-all;      
+    overflow-wrap: break-word;  
+    max-width: 100%;            
 }
 
 @media (min-width: 640px) {
@@ -344,7 +348,7 @@ article li { margin-bottom: 0.75rem; }
     border: 1px solid #30363d;
     border-radius: 6px;
     overflow: hidden;
-    width: 100%; /* Force containment */
+    width: 100%; 
 }
 
 .code-header {
@@ -360,10 +364,10 @@ article li { margin-bottom: 0.75rem; }
 
 .code-content {
     padding: 1rem;
-    overflow-x: auto; /* CRITICAL: Enables horizontal scroll */
+    overflow-x: auto; 
     overflow-y: auto;
     max-height: 400px;
-    font-size: 0.75rem; /* Smaller code font for mobile */
+    font-size: 0.75rem; 
     line-height: 1.5;
     color: #e6edf3;
     font-family: 'Fira Code', monospace;
