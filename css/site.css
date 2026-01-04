@@ -1,56 +1,57 @@
 /* =========================================
-   1. VARIABLES & SETUP
+   1. SETUP & VARIABLES
    ========================================= */
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap');
 
 :root {
-    /* LIGHT MODE: Professional & Grounded */
-    --bg-body: #f1f5f9;       /* Light Slate (Solid Surface) */
-    --bg-card: #ffffff;       /* Pure White Panels */
+    /* LIGHT MODE: Engineered & Low Glare */
+    --bg-body: #94a3b8;       /* Slate 400 - A dark, solid grey. No more blinding white. */
+    --bg-card: #f8fafc;       /* Off-White Cards. Easy on the eyes. */
     
-    --text-main: #0f172a;     /* Deep Navy (Not harsh black) */
+    --text-main: #0f172a;     /* Deep Navy/Black */
     --text-muted: #475569;    /* Slate 600 */
     
-    --accent: #2563eb;        /* Royal Blue */
-    --border: #cbd5e1;        /* Defined Grey Borders */
+    --accent: #0f172a;        /* Main structural accent (Black) */
+    --accent-pop: #2563eb;    /* Active element accent (Blue) */
+    --border: #475569;        /* 3px Slate Borders. High Visibility. */
     
-    /* TERMINAL: Softened Dark Theme */
-    --term-bg: #1e293b;       /* Slate 800 (Not Pitch Black) */
-    --term-text: #e2e8f0;     /* Off-white */
-    --term-accent: #38bdf8;   /* Cyan */
-    --term-success: #4ade80;  /* Green */
+    /* TERMINAL: Balanced Dark Mode */
+    --term-bg: #1e293b;       /* Slate 800 - Readable, not void black */
+    --term-text: #e2e8f0;
+    --term-accent: #38bdf8;
+    --term-success: #4ade80;
 
-    --radius: 6px;
-    /* Grounded, Realistic Shadows */
-    --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --radius: 4px;            /* Boxy, industrial corners */
+    --border-width: 3px;      /* THICK borders. Tangible. */
+    --shadow: 6px 6px 0px rgba(15, 23, 42, 0.2); /* Hard, physical shadow */
 }
 
 /* DARK MODE */
 body.dark-mode {
-    --bg-body: #0f172a;       /* Slate 900 */
+    --bg-body: #020617;       /* Void Black */
     --bg-card: #1e293b;       /* Slate 800 */
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --accent: #60a5fa;
-    --border: #334155;
-    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --text-main: #ffffff;
+    --text-muted: #cbd5e1;
+    --accent: #ffffff;
+    --accent-pop: #60a5fa;
+    --border: #64748b;
+    --shadow: 6px 6px 0px rgba(0, 0, 0, 0.5);
 }
 
 /* =========================================
-   2. GLOBAL RESET
+   2. GLOBAL LAYOUT
    ========================================= */
 * { box-sizing: border-box; }
 
 body {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: var(--bg-body);
     color: var(--text-main);
     line-height: 1.6;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    transition: background-color 0.2s, color 0.2s;
+    /* Transition is removed for instant snapping to feel faster/solid */
 }
 
 /* Technical Font */
@@ -61,17 +62,18 @@ code, pre, .sub-info, #demo-summary, input, select, button, .code-header {
 
 h1, h2, h3 {
     font-weight: 800;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
     color: var(--text-main);
     margin-bottom: 0.5em;
 }
 
 a { 
-    color: var(--accent); 
+    color: var(--accent-pop); 
     text-decoration: none; 
-    font-weight: 600; 
+    font-weight: 700;
+    border-bottom: 2px solid transparent; 
 }
-a:hover { text-decoration: underline; }
+a:hover { border-bottom-color: var(--accent-pop); }
 
 .code-container {
     max-width: 1000px;
@@ -81,12 +83,16 @@ a:hover { text-decoration: underline; }
 }
 
 /* =========================================
-   3. HEADER (Clean & Aligned)
+   3. HEADER (Contained)
    ========================================= */
+/* Even the header gets a "Panel" feel now */
 header {
-    margin-bottom: 3rem;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 2rem;
+    background: var(--bg-card);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 4rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -101,8 +107,9 @@ header > div {
 
 header h1 { 
     font-size: 3rem; 
-    line-height: 1.1; 
+    line-height: 1; 
     margin: 0; 
+    text-transform: uppercase;
 }
 
 header p { 
@@ -110,35 +117,33 @@ header p {
     color: var(--text-muted); 
     font-size: 1rem;
     margin-top: 0.5rem;
+    font-weight: 600;
 }
 
-/* The Toggle Button */
 #theme-toggle {
     grid-column: 2;
     grid-row: 1;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
+    background: var(--bg-body); /* Contrast against card */
+    border: 2px solid var(--text-main);
+    color: var(--text-main);
     padding: 0.5rem 1rem;
     border-radius: var(--radius);
     cursor: pointer;
-    font-size: 0.75rem;
     font-family: 'Fira Code', monospace;
+    font-weight: 700;
     text-transform: uppercase;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: all 0.2s;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
 }
 
 #theme-toggle:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    transform: translate(2px, 2px);
+    box-shadow: none;
 }
 
 nav { 
     display: flex; 
-    gap: 1.25rem; 
-    font-size: 1.5rem; 
+    gap: 1.5rem; 
+    font-size: 1.75rem; 
     margin-top: 0.5rem;
 }
 
@@ -159,110 +164,123 @@ nav {
 section { margin-bottom: 5rem; }
 
 section h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     text-transform: uppercase;
-    border-bottom: 3px solid var(--accent);
-    padding-bottom: 0.5rem;
-    margin-bottom: 2rem;
+    /* Label style instead of floating text */
+    background: var(--text-main);
+    color: var(--bg-card);
+    padding: 0.25rem 0.75rem;
     display: inline-block;
+    border-radius: 4px;
+    margin-bottom: 2rem;
 }
 
 /* =========================================
-   5. CARDS (Grounded Panels)
+   5. UNIVERSAL CARD SYSTEM
    ========================================= */
-#projects, #employment-history {
+/* Apply Grid to ALL content sections so nothing floats */
+#projects, #employment-history, #skills .grid-container, #references .grid-container, #education {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
-#projects h2, #employment-history h2 {
+/* Force H2 to span full width if inside grid */
+#projects h2, #employment-history h2, #skills h2, #references h2 {
     grid-column: 1 / -1;
-    width: 100%;
 }
 
-article {
+/* The "Box" that everything lives in */
+article, .reference-item, #skills div {
     background: var(--bg-card);
-    border: 1px solid var(--border);
+    border: var(--border-width) solid var(--border);
     border-radius: var(--radius);
     padding: 2rem;
-    box-shadow: var(--shadow-card); /* Realistic shadow */
+    box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
     height: 100%;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-article:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
-    border-color: var(--accent);
-}
-
-/* Colored Spine */
-article::before {
+/* Thick Accent Spine for EVERY card */
+article::before, .reference-item::before, #skills div::before {
     content: "";
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
-    width: 4px;
-    background: var(--accent);
+    width: 8px; /* Thicker */
+    background: var(--accent-pop);
 }
 
-article h3 {
+article:hover, .reference-item:hover, #skills div:hover {
+    border-color: var(--accent-pop);
+    transform: translateY(-2px);
+}
+
+article h3, .reference-item h3, #skills h3 {
     margin-top: 0;
     font-size: 1.25rem;
+    border-bottom: 2px solid var(--border); /* Divider inside card */
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
 }
 
 .sub-info {
     font-size: 0.85rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    /* REMOVED: text-transform: uppercase */
-    margin-bottom: 1rem;
+    color: var(--text-main);
+    font-weight: 700;
+    margin-bottom: 1.25rem;
     display: block;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.75rem;
 }
 
-article ul {
+article ul, #skills ul {
     padding-left: 1.25rem;
     margin: 0;
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--text-muted);
 }
 
-article li { margin-bottom: 0.5rem; }
+article li, #skills li { margin-bottom: 0.5rem; }
+
+/* Skills specifics */
+#skills h3 { color: var(--accent-pop); border-color: var(--border); }
+#skills li { border-bottom: 1px solid var(--border); padding: 0.5rem 0; }
+#skills li:last-child { border: none; }
+
+/* References specifics */
+#references .reference-item p { margin: 0.5rem 0; color: var(--text-muted); }
+#references .reference-item strong { color: var(--text-main); }
 
 /* =========================================
-   6. TERMINAL DEMO (Readable & Integrated)
+   6. TERMINAL DEMO (Contained & Readable)
    ========================================= */
 #api-demo {
+    /* Make it a card too */
     background: var(--term-bg);
-    color: var(--term-text);
-    padding: 2rem;
+    border: var(--border-width) solid var(--text-main);
     border-radius: var(--radius);
-    border: 1px solid var(--border); /* Subtle border to ground it */
-    box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    color: var(--term-text);
 }
 
 #api-demo h2 {
     color: var(--term-accent);
-    border: none;
+    background: transparent; /* Override default H2 style */
+    padding: 0;
     margin-top: 0;
     font-family: 'Fira Code', monospace;
 }
 
 #api-demo .sub-info {
-    color: #cbd5e1; /* Lighter text for dark bg */
-    border-color: #334155;
-    font-size: 0.9rem;
-    line-height: 1.7;
+    color: #cbd5e1;
+    font-weight: 400;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 1.5rem;
     margin-bottom: 2rem;
-    /* REMOVED: text-transform: uppercase */
 }
 
 #api-demo .grid {
@@ -273,10 +291,10 @@ article li { margin-bottom: 0.5rem; }
 
 /* Inputs */
 #demo-text, #demo-mode {
-    background: #0f172a; /* Darker than container */
-    border: 1px solid #334155;
+    background: #0f172a;
+    border: 2px solid #334155;
     color: #fff;
-    padding: 0.75rem;
+    padding: 1rem;
     border-radius: var(--radius);
     font-size: 1rem;
     width: 100%;
@@ -286,9 +304,9 @@ article li { margin-bottom: 0.5rem; }
 #demo-send {
     background: var(--term-accent);
     color: #0f172a;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
-    padding: 0.75rem;
+    padding: 1rem;
     border: none;
     border-radius: var(--radius);
     cursor: pointer;
@@ -299,15 +317,13 @@ article li { margin-bottom: 0.5rem; }
 
 /* Output */
 .summary-panel--dark {
-    background: #020617; /* Near black for contrast */
-    border-left: 4px solid var(--term-success);
+    background: #020617;
+    border: 2px solid var(--term-success);
     color: var(--term-success);
     padding: 1rem;
-    margin-top: 1.5rem;
-    font-size: 0.85rem;
-    border-radius: 0 4px 4px 0;
+    margin-top: 2rem;
+    font-size: 0.9rem;
     
-    /* Wrap Logic */
     white-space: pre-wrap;
     word-break: break-all;
     overflow-wrap: break-word;
@@ -323,20 +339,20 @@ article li { margin-bottom: 0.5rem; }
 }
 
 /* =========================================
-   7. SOURCE CODE
+   7. SOURCE CODE (Contained)
    ========================================= */
 .code-window {
     margin-top: 2rem;
     background: #0d1117;
-    border: 1px solid #30363d;
+    border: 2px solid #30363d;
     border-radius: var(--radius);
     width: 100%;
 }
 
 .code-header {
     background: #161b22;
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid #30363d;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid #30363d;
     font-size: 0.8rem;
     color: #8b949e;
     display: flex;
@@ -347,45 +363,24 @@ article li { margin-bottom: 0.5rem; }
     padding: 1rem;
     overflow-x: auto;
     max-height: 400px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: #e6edf3;
     font-family: 'Fira Code', monospace;
 }
-
 .code-content pre { margin: 0; }
 
 /* =========================================
-   8. SKILLS & FOOTER
+   8. FOOTER
    ========================================= */
-#skills div {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    padding: 1.5rem;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-card);
-}
-
-#skills h3 {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1rem;
-}
-
-#skills ul { list-style: none; padding: 0; }
-
-#skills li {
-    font-family: 'Fira Code', monospace;
-    font-size: 0.9rem;
-    color: var(--text-main);
-    padding: 0.35rem 0;
-    border-bottom: 1px solid var(--border);
-}
-#skills li:last-child { border-bottom: none; }
-
 footer {
     text-align: center;
-    margin-top: 5rem;
-    color: var(--text-muted);
-    font-size: 0.9rem;
+    margin-top: 6rem;
+    /* Use a card for footer too, why not? Keeps it contained. */
+    background: var(--bg-card);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    color: var(--text-main);
+    font-weight: 600;
+    box-shadow: var(--shadow);
 }
