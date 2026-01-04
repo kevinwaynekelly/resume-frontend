@@ -73,42 +73,46 @@ a:hover { text-decoration: underline; text-underline-offset: 4px; }
    3. HEADER & HERO
    ========================================= */
 header {
-    position: relative; /* Anchor for the absolute button */
     margin-bottom: 4rem;
     border-bottom: 1px solid var(--border);
     padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1.5rem;
+}
+
+/* NEW: Grid Layout for the Top Section 
+   This creates two columns: 
+   1. The Left (Name/Info) takes all available space (1fr)
+   2. The Right (Button) takes only what it needs (auto)
+*/
+header > div {
+    display: grid;
+    grid-template-columns: 1fr auto; 
+    gap: 1rem;
+    align-items: start;
 }
 
 header h1 { 
+    grid-column: 1;      /* Stay in left column */
     font-size: 3rem; 
     line-height: 1.1; 
     margin: 0;
-    max-width: 80%; /* Prevent overlap */
 }
 
 header p { 
+    grid-column: 1;      /* Stay in left column, under H1 */
     font-family: 'Fira Code', monospace;
     color: var(--text-muted); 
     font-size: 1rem;
-    margin: 0;
+    margin-top: 0.5rem;
     max-width: 90%;
 }
 
-nav { 
-    display: flex; 
-    gap: 1.5rem; 
-    font-size: 1.5rem; 
-    margin-top: 0.5rem;
-}
-
-/* "System Toggle" Button - Top Right */
+/* Button sits in Column 2, aligned with the Name */
 #theme-toggle {
-    position: absolute;
-    top: 0;
-    right: 0;
+    grid-column: 2;
+    grid-row: 1;
     
     background: transparent;
     border: 1px solid var(--border);
@@ -120,6 +124,7 @@ nav {
     font-family: 'Fira Code', monospace;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    white-space: nowrap; /* Prevent button text wrapping */
     transition: all 0.2s;
 }
 
@@ -129,12 +134,27 @@ nav {
     background: var(--bg-card);
 }
 
-@media (max-width: 640px) {
-    header h1 { font-size: 2.25rem; }
-    #theme-toggle {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.7rem;
+nav { 
+    display: flex; 
+    gap: 1.5rem; 
+    font-size: 1.5rem; 
+    margin-top: 0.5rem;
+}
+
+/* Mobile Portrait: Stack them vertically if screen is too narrow */
+@media (max-width: 600px) {
+    header > div {
+        grid-template-columns: 1fr; /* Single column */
     }
+    
+    #theme-toggle {
+        grid-column: 1;
+        grid-row: 2; /* Move button below name */
+        justify-self: start;
+        margin-top: 0.5rem;
+    }
+    
+    header h1 { font-size: 2.5rem; }
 }
 
 /* =========================================
