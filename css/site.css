@@ -1,87 +1,77 @@
 /* =========================================
-   1. DESIGN SYSTEM & VARIABLES
+   1. VARIABLES & SETUP
    ========================================= */
-/* Import: Inter for UI, Fira Code for Data */
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap');
 
 :root {
-    /* LIGHT MODE: "Industrial Blueprint" */
-    /* Background is darker to kill glare */
-    --bg-body: #cbd5e1;       
-    --bg-card: #ffffff;
+    /* LIGHT MODE: Professional & Grounded */
+    --bg-body: #f1f5f9;       /* Light Slate (Solid Surface) */
+    --bg-card: #ffffff;       /* Pure White Panels */
     
-    /* Text: High Contrast (WCAG AAA Compliant) */
-    --text-main: #020617;     /* Ink Black */
-    --text-muted: #475569;    /* Dark Slate */
+    --text-main: #0f172a;     /* Deep Navy (Not harsh black) */
+    --text-muted: #475569;    /* Slate 600 */
     
-    /* Accents & Borders */
-    --accent: #0f172a;        /* Primary Action Color (Dark Navy) */
-    --accent-pop: #2563eb;    /* Highlight Color (Royal Blue) */
-    --border: #64748b;        /* Mid-Grey Structural Borders */
+    --accent: #2563eb;        /* Royal Blue */
+    --border: #cbd5e1;        /* Defined Grey Borders */
     
-    /* Terminal (High Contrast) */
-    --term-bg: #0f172a;
-    --term-text: #f1f5f9;
-    --term-accent: #38bdf8;
-    --term-success: #4ade80;
+    /* TERMINAL: Softened Dark Theme */
+    --term-bg: #1e293b;       /* Slate 800 (Not Pitch Black) */
+    --term-text: #e2e8f0;     /* Off-white */
+    --term-accent: #38bdf8;   /* Cyan */
+    --term-success: #4ade80;  /* Green */
 
-    /* Metrics */
-    --radius: 4px;            /* Tight, engineered corners */
-    --border-width: 2px;      /* Tangible boundaries */
-    --shadow-hard: 4px 4px 0px rgba(15, 23, 42, 0.15); /* Physical depth */
+    --radius: 6px;
+    /* Grounded, Realistic Shadows */
+    --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
 
-/* DARK MODE: "Night Ops" */
+/* DARK MODE */
 body.dark-mode {
-    --bg-body: #020617;       /* Void Black */
+    --bg-body: #0f172a;       /* Slate 900 */
     --bg-card: #1e293b;       /* Slate 800 */
-    --text-main: #ffffff;
-    --text-muted: #cbd5e1;
-    --accent: #ffffff;
-    --accent-pop: #60a5fa;
-    --border: #475569;
-    --shadow-hard: 4px 4px 0px rgba(0, 0, 0, 0.5);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
 }
 
 /* =========================================
-   2. CORE TYPOGRAPHY & RESET
+   2. GLOBAL RESET
    ========================================= */
 * { box-sizing: border-box; }
 
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     background-color: var(--bg-body);
     color: var(--text-main);
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    -webkit-font-smoothing: antialiased; /* Sharper text on Mac */
+    overflow-x: hidden;
+    transition: background-color 0.2s, color 0.2s;
 }
 
-/* Tech Font for Data */
+/* Technical Font */
 code, pre, .sub-info, #demo-summary, input, select, button, .code-header {
     font-family: 'Fira Code', monospace;
-    font-weight: 500; /* Bolder for readability */
+    font-weight: 500;
 }
 
 h1, h2, h3 {
-    font-weight: 800; /* Extra Bold */
-    letter-spacing: -0.03em;
-    margin-bottom: 0.5em;
+    font-weight: 800;
+    letter-spacing: -0.025em;
     color: var(--text-main);
+    margin-bottom: 0.5em;
 }
 
 a { 
-    color: var(--accent-pop); 
+    color: var(--accent); 
     text-decoration: none; 
-    font-weight: 700;
-    border-bottom: 2px solid transparent; 
+    font-weight: 600; 
 }
-
-a:hover { 
-    border-bottom-color: var(--accent-pop); 
-}
+a:hover { text-decoration: underline; }
 
 .code-container {
     max-width: 1000px;
@@ -91,11 +81,11 @@ a:hover {
 }
 
 /* =========================================
-   3. HEADER (The Control Panel)
+   3. HEADER (Clean & Aligned)
    ========================================= */
 header {
-    margin-bottom: 4rem;
-    border-bottom: var(--border-width) solid var(--text-main); /* Thick separator */
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
     padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
@@ -104,63 +94,57 @@ header {
 
 header > div {
     display: grid;
-    grid-template-columns: 1fr auto; 
+    grid-template-columns: 1fr auto;
     gap: 1rem;
     align-items: start;
 }
 
 header h1 { 
-    grid-column: 1;      
-    font-size: 3.5rem; 
-    line-height: 1; 
-    margin: 0;
-    text-transform: uppercase;
+    font-size: 3rem; 
+    line-height: 1.1; 
+    margin: 0; 
 }
 
 header p { 
-    grid-column: 1;      
     font-family: 'Fira Code', monospace;
     color: var(--text-muted); 
-    font-size: 1.1rem;
-    font-weight: 600; /* High contrast */
-    margin-top: 0.75rem;
+    font-size: 1rem;
+    margin-top: 0.5rem;
 }
 
-/* Toggle Switch - Styled like a physical component */
+/* The Toggle Button */
 #theme-toggle {
     grid-column: 2;
     grid-row: 1;
-    
     background: var(--bg-card);
-    border: var(--border-width) solid var(--text-main);
-    color: var(--text-main);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
     padding: 0.5rem 1rem;
     border-radius: var(--radius);
     cursor: pointer;
     font-size: 0.75rem;
     font-family: 'Fira Code', monospace;
-    font-weight: 700;
     text-transform: uppercase;
-    box-shadow: var(--shadow-hard);
-    transition: transform 0.1s;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.2s;
 }
 
 #theme-toggle:hover {
-    transform: translate(2px, 2px); /* Button press effect */
-    box-shadow: none;
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
 nav { 
     display: flex; 
-    gap: 1.5rem; 
-    font-size: 1.75rem; 
+    gap: 1.25rem; 
+    font-size: 1.5rem; 
     margin-top: 0.5rem;
 }
 
-/* Mobile Adjustments */
 @media (max-width: 640px) {
     header > div { grid-template-columns: 1fr; }
-    header h1 { font-size: 2.5rem; }
+    header h1 { font-size: 2.25rem; }
     #theme-toggle {
         grid-column: 1;
         grid-row: 2;
@@ -170,26 +154,26 @@ nav {
 }
 
 /* =========================================
-   4. SECTIONS & TITLES
+   4. SECTIONS
    ========================================= */
-section { margin-bottom: 6rem; }
+section { margin-bottom: 5rem; }
 
 section h2 {
     font-size: 1.5rem;
     text-transform: uppercase;
-    border-bottom: 4px solid var(--accent-pop); /* Heavy underline */
-    padding-bottom: 0.25rem;
-    margin-bottom: 2.5rem;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
     display: inline-block;
 }
 
 /* =========================================
-   5. CARDS (The "Tangible" Look)
+   5. CARDS (Grounded Panels)
    ========================================= */
 #projects, #employment-history {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); 
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 1.5rem;
 }
 
 #projects h2, #employment-history h2 {
@@ -199,145 +183,138 @@ section h2 {
 
 article {
     background: var(--bg-card);
-    border: var(--border-width) solid var(--border);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 2rem;
-    box-shadow: var(--shadow-hard);
+    box-shadow: var(--shadow-card); /* Realistic shadow */
     position: relative;
     overflow: hidden;
     height: 100%;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 article:hover {
     transform: translateY(-2px);
-    border-color: var(--accent-pop);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent);
 }
 
-/* The Accent Spine */
+/* Colored Spine */
 article::before {
     content: "";
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
-    width: 6px;
-    background: var(--accent-pop);
+    width: 4px;
+    background: var(--accent);
 }
 
-article h3 { 
-    margin-top: 0; 
-    font-size: 1.25rem; 
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.75rem;
-    margin-bottom: 1rem;
+article h3 {
+    margin-top: 0;
+    font-size: 1.25rem;
 }
 
 .sub-info {
     font-size: 0.85rem;
-    color: var(--text-main); /* Darker for readability */
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 1.25rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    /* REMOVED: text-transform: uppercase */
+    margin-bottom: 1rem;
     display: block;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.75rem;
 }
 
 article ul {
     padding-left: 1.25rem;
     margin: 0;
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--text-muted);
 }
 
 article li { margin-bottom: 0.5rem; }
 
 /* =========================================
-   6. TERMINAL DEMO (High Contrast)
+   6. TERMINAL DEMO (Readable & Integrated)
    ========================================= */
 #api-demo {
     background: var(--term-bg);
     color: var(--term-text);
-    padding: 1.5rem; 
+    padding: 2rem;
     border-radius: var(--radius);
-    border: var(--border-width) solid var(--text-main);
-    box-shadow: var(--shadow-hard);
-    overflow: hidden; 
+    border: 1px solid var(--border); /* Subtle border to ground it */
+    box-shadow: var(--shadow-card);
 }
 
 #api-demo h2 {
     color: var(--term-accent);
     border: none;
-    margin-top: 0.5rem;
+    margin-top: 0;
     font-family: 'Fira Code', monospace;
 }
 
 #api-demo .sub-info {
-    color: #e2e8f0; /* Readable on dark bg */
-    font-weight: 400;
-    border-bottom: 1px solid #334155;
-    padding-bottom: 1.5rem;
+    color: #cbd5e1; /* Lighter text for dark bg */
+    border-color: #334155;
+    font-size: 0.9rem;
+    line-height: 1.7;
     margin-bottom: 2rem;
+    /* REMOVED: text-transform: uppercase */
 }
 
 #api-demo .grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    margin-top: 2rem;
 }
 
-/* Inputs styled as dark console fields */
+/* Inputs */
 #demo-text, #demo-mode {
-    background: #1e293b;
-    border: 2px solid #475569;
+    background: #0f172a; /* Darker than container */
+    border: 1px solid #334155;
     color: #fff;
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: var(--radius);
     font-size: 1rem;
     width: 100%;
 }
 
-#demo-text:focus, #demo-mode:focus {
-    outline: none;
-    border-color: var(--term-accent);
-}
-
-/* Execute Button */
+/* Button */
 #demo-send {
     background: var(--term-accent);
     color: #0f172a;
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
-    padding: 1rem;
+    padding: 0.75rem;
     border: none;
     border-radius: var(--radius);
     cursor: pointer;
     width: 100%;
-    transition: filter 0.2s;
 }
 
 #demo-send:hover { filter: brightness(1.1); }
 
-/* The Output Screen */
+/* Output */
 .summary-panel--dark {
-    background: #000;
-    border: 2px solid var(--term-success);
+    background: #020617; /* Near black for contrast */
+    border-left: 4px solid var(--term-success);
     color: var(--term-success);
     padding: 1rem;
-    margin-top: 2rem;
-    font-size: 0.9rem; 
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    border-radius: 0 4px 4px 0;
     
-    /* Text Wrap Fix */
-    white-space: pre-wrap;      
-    word-break: break-all;      
-    overflow-wrap: break-word;  
-    max-width: 100%;            
+    /* Wrap Logic */
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 @media (min-width: 640px) {
-    #api-demo { padding: 2.5rem; }
     #api-demo .grid {
         grid-template-columns: 1fr auto auto;
         align-items: end;
@@ -346,33 +323,31 @@ article li { margin-bottom: 0.5rem; }
 }
 
 /* =========================================
-   7. SOURCE CODE WINDOW
+   7. SOURCE CODE
    ========================================= */
 .code-window {
     margin-top: 2rem;
     background: #0d1117;
-    border: 2px solid #30363d;
+    border: 1px solid #30363d;
     border-radius: var(--radius);
-    width: 100%; 
+    width: 100%;
 }
 
 .code-header {
     background: #161b22;
-    padding: 0.75rem 1rem;
-    border-bottom: 2px solid #30363d;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #30363d;
     font-size: 0.8rem;
     color: #8b949e;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    font-weight: 700;
 }
 
 .code-content {
     padding: 1rem;
-    overflow-x: auto; 
+    overflow-x: auto;
     max-height: 400px;
-    font-size: 0.85rem; 
+    font-size: 0.8rem;
     color: #e6edf3;
     font-family: 'Fira Code', monospace;
 }
@@ -384,18 +359,16 @@ article li { margin-bottom: 0.5rem; }
    ========================================= */
 #skills div {
     background: var(--bg-card);
-    border: var(--border-width) solid var(--border);
-    padding: 2rem;
+    border: 1px solid var(--border);
+    padding: 1.5rem;
     border-radius: var(--radius);
-    box-shadow: var(--shadow-hard);
+    box-shadow: var(--shadow-card);
 }
 
-#skills h3 { 
-    font-size: 1rem; 
-    text-transform: uppercase; 
-    color: var(--accent-pop); 
-    border-bottom: 2px solid var(--border);
-    padding-bottom: 0.5rem;
+#skills h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--accent);
     margin-bottom: 1rem;
 }
 
@@ -403,18 +376,16 @@ article li { margin-bottom: 0.5rem; }
 
 #skills li {
     font-family: 'Fira Code', monospace;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--text-main);
-    padding: 0.5rem 0;
+    padding: 0.35rem 0;
     border-bottom: 1px solid var(--border);
 }
 #skills li:last-child { border-bottom: none; }
 
 footer {
     text-align: center;
-    margin-top: 6rem;
-    color: var(--text-main);
+    margin-top: 5rem;
+    color: var(--text-muted);
     font-size: 0.9rem;
-    font-weight: 600;
-    opacity: 0.8;
 }
