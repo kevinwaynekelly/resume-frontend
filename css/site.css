@@ -5,12 +5,12 @@
 
 :root {
     /* Light Mode: "Clean Lab" Aesthetic */
-    --bg-body: #f1f5f9;       /* Light Slate Grey - Not stark white */
+    --bg-body: #f8fafc;       
     --bg-card: #ffffff;
-    --text-main: #0f172a;     /* Deep Navy/Black */
+    --text-main: #0f172a;     /* Deep Navy */
     --text-muted: #475569;    /* Slate 600 */
     --accent: #2563eb;        /* Engineering Blue */
-    --border: #cbd5e1;
+    --border: #e2e8f0;
     
     /* Terminal Colors (Fixed) */
     --term-bg: #0f172a;
@@ -18,17 +18,17 @@
     --term-accent: #38bdf8;   /* Cyan */
     --term-success: #34d399;  /* Matrix Green */
 
-    --radius: 6px; /* Tighter radius for industrial look */
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --radius: 6px; 
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark Mode: "IDE / Dark Room" Aesthetic */
+/* Dark Mode */
 body.dark-mode {
-    --bg-body: #020617;       /* Almost Black */
-    --bg-card: #0f172a;       /* Slate 900 */
+    --bg-body: #020617;       
+    --bg-card: #0f172a;       
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
-    --accent: #60a5fa;        /* Lighter Blue */
+    --accent: #60a5fa;        
     --border: #1e293b;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
 }
@@ -48,14 +48,14 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* The "Tech" Font */
+/* Technical Font */
 code, pre, .sub-info, #demo-summary, input, select, button, .reference-item h3 {
     font-family: 'Fira Code', monospace;
 }
 
 h1, h2, h3 {
     font-weight: 700;
-    letter-spacing: -0.03em; /* Tight tracking for modern look */
+    letter-spacing: -0.02em;
     margin-bottom: 0.5em;
     color: var(--text-main);
 }
@@ -64,7 +64,7 @@ a { color: var(--accent); text-decoration: none; font-weight: 600; }
 a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
 .code-container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 3rem 1.5rem;
 }
@@ -78,7 +78,7 @@ header {
     padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 header h1 { 
@@ -90,7 +90,7 @@ header h1 {
 header p { 
     font-family: 'Fira Code', monospace;
     color: var(--text-muted); 
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin: 0;
 }
 
@@ -98,68 +98,76 @@ nav {
     display: flex; 
     gap: 1.5rem; 
     font-size: 1.5rem; 
+    margin-top: 1rem;
 }
 
+/* Styled Button */
 #theme-toggle {
     background: var(--bg-card);
     border: 1px solid var(--border);
     color: var(--text-main);
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     border-radius: var(--radius);
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 600;
     align-self: flex-start;
     transition: all 0.2s;
+    box-shadow: var(--shadow);
 }
 
 #theme-toggle:hover {
     border-color: var(--accent);
     color: var(--accent);
+    transform: translateY(-1px);
 }
 
 /* =========================================
-   4. SECTIONS & MODULES
+   4. SECTIONS
    ========================================= */
 section { margin-bottom: 5rem; }
 
 section h2 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     border-bottom: 2px solid var(--accent);
     padding-bottom: 0.5rem;
     margin-bottom: 2rem;
-    display: inline-block; /* Only underline the text */
+    display: inline-block;
 }
 
 /* =========================================
-   5. CARDS (Projects & Experience)
+   5. CARDS GRID (FIXED)
    ========================================= */
 #projects, #employment-history {
     display: grid;
-    grid-template-columns: 1fr; /* Default mobile */
+    /* This creates responsive columns automatically */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
     gap: 2rem;
 }
 
-/* Desktop Grid */
-@media (min-width: 768px) {
-    #projects, #employment-history {
-        grid-template-columns: repeat(2, 1fr);
-    }
+/* THE FIX: Force the H2 to span the full width of the grid */
+#projects h2, #employment-history h2 {
+    grid-column: 1 / -1;
+    width: 100%;
 }
 
 article {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 1.75rem;
+    padding: 2rem;
     box-shadow: var(--shadow);
     transition: transform 0.2s, box-shadow 0.2s;
     position: relative;
     overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-/* The "Tech Stripe" - Adds a colored bar to the left of every card */
+/* Tech Stripe */
 article::before {
     content: "";
     position: absolute;
@@ -168,58 +176,55 @@ article::before {
     bottom: 0;
     width: 4px;
     background: var(--accent);
-    opacity: 0.7;
 }
 
 article:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
     border-color: var(--accent);
 }
 
-article h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.1rem;
-}
+article h3 { margin-top: 0; font-size: 1.25rem; }
 
 .sub-info {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     display: block;
-    opacity: 0.8;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.75rem;
 }
 
 article ul {
-    padding-left: 1rem;
+    padding-left: 1.25rem;
     margin: 0;
     font-size: 0.95rem;
     color: var(--text-muted);
 }
 
-article li { margin-bottom: 0.5rem; }
+article li { margin-bottom: 0.75rem; }
 
 /* =========================================
-   6. THE "TERMINAL" (API Demo)
+   6. TERMINAL DEMO
    ========================================= */
 #api-demo {
     background: var(--term-bg);
     color: var(--term-text);
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: var(--radius);
     border: 1px solid #334155;
     font-family: 'Fira Code', monospace;
     position: relative;
+    box-shadow: var(--shadow);
 }
 
-/* Fake "Window Controls" for terminal look */
 #api-demo::before {
     content: "● ● ●";
     font-size: 0.7rem;
     color: #475569;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
     position: absolute;
     top: 1rem;
     left: 1.5rem;
@@ -228,34 +233,33 @@ article li { margin-bottom: 0.5rem; }
 #api-demo h2 {
     color: var(--term-accent);
     border: none;
-    margin-top: 1.5rem; /* Space for window controls */
+    margin-top: 1rem;
     font-family: 'Fira Code', monospace;
     text-transform: none;
+    font-size: 1.25rem;
 }
 
 #api-demo .sub-info {
     color: #94a3b8;
     text-transform: none;
-    border-bottom: 1px solid #334155;
-    padding-bottom: 1.5rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.7;
+    border-color: #334155;
+    line-height: 1.8;
 }
 
 #api-demo .grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
-/* Inputs styled like Command Line */
 #demo-text, #demo-mode {
     background: #1e293b;
     border: 1px solid #475569;
     color: var(--term-accent);
-    padding: 0.75rem;
+    padding: 1rem;
     border-radius: 4px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     width: 100%;
 }
 
@@ -264,22 +268,32 @@ article li { margin-bottom: 0.5rem; }
     color: #0f172a;
     font-weight: 700;
     text-transform: uppercase;
-    padding: 0.75rem;
+    padding: 1rem;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
+    letter-spacing: 0.05em;
 }
 
 #demo-send:hover { background: #7dd3fc; }
 
 .summary-panel--dark {
     background: #000;
-    border-left: 3px solid var(--term-success);
+    border-left: 4px solid var(--term-success);
     color: var(--term-success);
-    padding: 1rem;
-    margin-top: 1rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
     font-size: 0.9rem;
+    border-radius: 0 4px 4px 0;
+}
+
+@media (min-width: 640px) {
+    #api-demo .grid {
+        grid-template-columns: 1fr auto auto;
+        align-items: end;
+    }
+    #demo-send { width: auto; }
 }
 
 /* =========================================
@@ -288,31 +302,69 @@ article li { margin-bottom: 0.5rem; }
 #skills div {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: var(--radius);
+    box-shadow: var(--shadow);
 }
 
-#skills h3 { font-size: 1rem; text-transform: uppercase; color: var(--accent); }
-
-#skills ul {
-    list-style: none;
-    padding: 0;
+#skills h3 { 
+    font-size: 0.9rem; 
+    text-transform: uppercase; 
+    color: var(--accent); 
+    margin-bottom: 1rem;
 }
+
+#skills ul { list-style: none; padding: 0; }
 
 #skills li {
     font-family: 'Fira Code', monospace;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--text-main);
-    padding: 0.25rem 0;
+    padding: 0.5rem 0;
     border-bottom: 1px solid var(--border);
 }
-
 #skills li:last-child { border-bottom: none; }
 
 footer {
     text-align: center;
-    margin-top: 5rem;
+    margin-top: 6rem;
     color: var(--text-muted);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-family: 'Fira Code', monospace;
+    opacity: 0.8;
 }
+
+/* =========================================
+   8. SOURCE CODE WINDOW
+   ========================================= */
+.code-window {
+    margin-top: 2rem;
+    background: #0d1117; /* Darker Github-like bg */
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.code-header {
+    background: #161b22;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #30363d;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: #8b949e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.code-content {
+    padding: 1rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 400px; /* Scrollable height */
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #e6edf3;
+}
+
+.code-content pre { margin: 0; }
