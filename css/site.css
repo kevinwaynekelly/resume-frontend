@@ -4,18 +4,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap');
 
 :root {
-    /* PAGE: Soft Cool Grey (Professional, Low Glare) */
+    /* LIGHT MODE */
     --bg-body: #e2e8f0;       
-    
-    /* CARDS: Pure White */
     --bg-card: #ffffff;       
     
-    /* TEXT */
     --text-main: #0f172a;     /* Deep Navy */
     --text-muted: #475569;    /* Slate */
     
-    /* ACCENTS */
-    --accent: #2563eb;        /* Royal Blue (Primary) */
+    --accent: #2563eb;        /* Royal Blue */
     --border: #cbd5e1;        /* Defined Grey Borders */
     
     /* TERMINAL */
@@ -42,7 +38,7 @@ body.dark-mode {
 }
 
 /* =========================================
-   2. GLOBAL RESET
+   2. GLOBAL RESET & PERFORMANCE
    ========================================= */
 * { box-sizing: border-box; }
 
@@ -54,7 +50,7 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    transition: background-color 0.2s, color 0.2s;
+    /* REMOVED TRANSITION: Instant snap fixes the "Lag/Low FPS" issue */
 }
 
 /* Tech Font */
@@ -88,7 +84,6 @@ a:hover { text-decoration: underline; }
    3. HEADER
    ========================================= */
 header {
-    /* Make the header a card too for consistency */
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -135,7 +130,7 @@ header p {
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.75rem;
-    transition: all 0.2s;
+    /* Removed transition for instant feel */
 }
 
 #theme-toggle:hover {
@@ -169,37 +164,45 @@ section { margin-bottom: 5rem; }
 section h2 {
     font-size: 1.5rem;
     text-transform: uppercase;
-    /* Clean Title Style */
     background: transparent; 
     color: var(--text-main);
     padding: 0;
     margin-bottom: 1.5rem;
-    border-bottom: 3px solid var(--accent); /* Blue Underline */
+    border-bottom: 3px solid var(--accent);
     display: inline-block;
 }
 
 /* =========================================
-   5. UNIFIED CARD SYSTEM
+   5. CARD GRIDS (Fixed Education Width)
    ========================================= */
-/* Apply Grid to ALL content areas */
-#projects, #employment-history, #education, #skills .grid-container, #references .grid-container {
+
+/* MULTI-COLUMN GRIDS: Projects, History, Skills, References */
+#projects, #employment-history, #skills .grid-container, #references .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
     gap: 2rem;
 }
 
-/* Force H2 to always sit on top */
-#projects h2, #employment-history h2, #education h2, #skills h2, #references h2, #professional-summary h2 {
+/* SINGLE-COLUMN LAYOUT: Education & Summary 
+   This ensures the card always fills 100% of the space. */
+#education, #professional-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Header Spanning for Grids */
+#projects h2, #employment-history h2, #skills h2, #references h2 {
     grid-column: 1 / -1;
     width: 100%;
     margin-bottom: 1.5rem;
 }
 
-/* THE MAGIC: Turn EVERYTHING into a card */
+/* UNIFIED CARD STYLING */
 article, 
 .reference-item, 
 #skills div,
-#professional-summary p {  /* <--- Fixes the floating summary */
+#professional-summary p {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -208,9 +211,10 @@ article,
     position: relative;
     overflow: hidden;
     height: 100%;
+    width: 100%; /* Ensures expansion */
 }
 
-/* Add the Blue Spine to everything */
+/* Blue Spine */
 article::before, 
 .reference-item::before, 
 #skills div::before, 
@@ -224,14 +228,14 @@ article::before,
     background: var(--accent);
 }
 
-/* Hover Effects */
+/* Hover Effects - Kept simple and performant */
 article:hover, .reference-item:hover, #skills div:hover, #professional-summary p:hover {
     transform: translateY(-2px);
     border-color: var(--accent);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    /* No shadow transition to keep it fast */
 }
 
-/* Card Content Styling */
+/* Card Typography */
 article h3, .reference-item h3, #skills h3 {
     margin-top: 0;
     font-size: 1.25rem;
@@ -259,7 +263,7 @@ article ul, #skills ul {
 article li, #skills li { margin-bottom: 0.5rem; }
 
 /* References Specifics */
-#references p { margin-bottom: 2rem; color: var(--text-muted); } /* Intro text */
+#references p { margin-bottom: 2rem; color: var(--text-muted); }
 #references .reference-item p { margin: 0.5rem 0; color: var(--text-muted); }
 #references .reference-item strong { color: var(--text-main); }
 
@@ -267,7 +271,6 @@ article li, #skills li { margin-bottom: 0.5rem; }
    6. TERMINAL DEMO
    ========================================= */
 #api-demo {
-    /* Style as a card too */
     background: var(--term-bg);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -281,7 +284,9 @@ article li, #skills li { margin-bottom: 0.5rem; }
     border: none;
     margin-top: 0;
     font-family: 'Fira Code', monospace;
-    text-transform: none; /* Removed All Caps */
+    text-transform: none;
+    background: transparent;
+    padding: 0;
 }
 
 #api-demo .sub-info {
@@ -290,7 +295,7 @@ article li, #skills li { margin-bottom: 0.5rem; }
     border-bottom: 1px solid #334155;
     padding-bottom: 1.5rem;
     margin-bottom: 2rem;
-    text-transform: none; /* Removed All Caps */
+    text-transform: none;
     line-height: 1.7;
 }
 
