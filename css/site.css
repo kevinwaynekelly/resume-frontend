@@ -45,6 +45,7 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* Prevents horizontal scroll on mobile */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -66,11 +67,12 @@ a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .code-container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 3rem 1.5rem;
+    padding: 2rem 1.5rem;
+    width: 100%;
 }
 
 /* =========================================
-   3. HEADER & HERO
+   3. HEADER & HERO (Responsive Fix)
    ========================================= */
 header {
     margin-bottom: 4rem;
@@ -81,11 +83,7 @@ header {
     gap: 1.5rem;
 }
 
-/* NEW: Grid Layout for the Top Section 
-   This creates two columns: 
-   1. The Left (Name/Info) takes all available space (1fr)
-   2. The Right (Button) takes only what it needs (auto)
-*/
+/* Grid Layout: Name Left, Button Right */
 header > div {
     display: grid;
     grid-template-columns: 1fr auto; 
@@ -94,22 +92,22 @@ header > div {
 }
 
 header h1 { 
-    grid-column: 1;      /* Stay in left column */
+    grid-column: 1;      
     font-size: 3rem; 
     line-height: 1.1; 
     margin: 0;
+    word-break: break-word; /* Prevents long names breaking layout */
 }
 
 header p { 
-    grid-column: 1;      /* Stay in left column, under H1 */
+    grid-column: 1;      
     font-family: 'Fira Code', monospace;
     color: var(--text-muted); 
     font-size: 1rem;
     margin-top: 0.5rem;
-    max-width: 90%;
 }
 
-/* Button sits in Column 2, aligned with the Name */
+/* Button sits in Column 2 */
 #theme-toggle {
     grid-column: 2;
     grid-row: 1;
@@ -124,7 +122,7 @@ header p {
     font-family: 'Fira Code', monospace;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    white-space: nowrap; /* Prevent button text wrapping */
+    white-space: nowrap; 
     transition: all 0.2s;
 }
 
@@ -139,22 +137,25 @@ nav {
     gap: 1.5rem; 
     font-size: 1.5rem; 
     margin-top: 0.5rem;
+    flex-wrap: wrap; /* Allows icons to wrap if needed */
 }
 
-/* Mobile Portrait: Stack them vertically if screen is too narrow */
-@media (max-width: 600px) {
+/* MOBILE HEADER FIX: Stack vertically on phones */
+@media (max-width: 640px) {
     header > div {
-        grid-template-columns: 1fr; /* Single column */
+        grid-template-columns: 1fr; /* Force single column */
     }
     
+    header h1 { 
+        font-size: 2.25rem; 
+    }
+
     #theme-toggle {
         grid-column: 1;
-        grid-row: 2; /* Move button below name */
-        justify-self: start;
+        grid-row: 2; /* Move button below text */
+        justify-self: start; /* Align left */
         margin-top: 0.5rem;
     }
-    
-    header h1 { font-size: 2.5rem; }
 }
 
 /* =========================================
@@ -177,7 +178,7 @@ section h2 {
    ========================================= */
 #projects, #employment-history {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 2rem;
 }
 
@@ -201,7 +202,6 @@ article {
     flex-direction: column;
 }
 
-/* Tech Stripe */
 article::before {
     content: "";
     position: absolute;
@@ -229,6 +229,7 @@ article h3 { margin-top: 0; font-size: 1.25rem; }
     display: block;
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.75rem;
+    word-wrap: break-word; /* Prevent long location text from breaking */
 }
 
 article ul {
@@ -246,12 +247,13 @@ article li { margin-bottom: 0.75rem; }
 #api-demo {
     background: var(--term-bg);
     color: var(--term-text);
-    padding: 2.5rem;
+    padding: 1.5rem; /* Reduced padding for mobile */
     border-radius: var(--radius);
     border: 1px solid #334155;
     font-family: 'Fira Code', monospace;
     position: relative;
     box-shadow: var(--shadow);
+    overflow: hidden; /* Contains child overflows */
 }
 
 #api-demo::before {
@@ -283,7 +285,7 @@ article li { margin-bottom: 0.75rem; }
 #api-demo .grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1rem;
     margin-top: 2rem;
 }
 
@@ -316,13 +318,16 @@ article li { margin-bottom: 0.75rem; }
     background: #000;
     border-left: 4px solid var(--term-success);
     color: var(--term-success);
-    padding: 1.5rem;
+    padding: 1rem;
     margin-top: 2rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Smaller font on mobile */
     border-radius: 0 4px 4px 0;
+    white-space: pre-wrap; /* Allows text wrapping */
+    word-break: break-all; /* Prevents encrypted text overflow */
 }
 
 @media (min-width: 640px) {
+    #api-demo { padding: 2.5rem; }
     #api-demo .grid {
         grid-template-columns: 1fr auto auto;
         align-items: end;
@@ -339,6 +344,7 @@ article li { margin-bottom: 0.75rem; }
     border: 1px solid #30363d;
     border-radius: 6px;
     overflow: hidden;
+    width: 100%; /* Force containment */
 }
 
 .code-header {
@@ -354,10 +360,10 @@ article li { margin-bottom: 0.75rem; }
 
 .code-content {
     padding: 1rem;
-    overflow-x: auto;
+    overflow-x: auto; /* CRITICAL: Enables horizontal scroll */
     overflow-y: auto;
     max-height: 400px;
-    font-size: 0.85rem;
+    font-size: 0.75rem; /* Smaller code font for mobile */
     line-height: 1.5;
     color: #e6edf3;
     font-family: 'Fira Code', monospace;
