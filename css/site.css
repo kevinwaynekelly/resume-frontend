@@ -336,9 +336,14 @@ article li, #skills li { margin-bottom: 0.5rem; }
     padding: 1rem;
     margin-top: 2rem;
     font-size: 0.9rem;
-    white-space: pre-wrap;
-    word-break: break-all;
-    max-width: 100%;
+    
+    /* FORCE WRAPPING FIX */
+    white-space: pre-wrap;       /* Respects line breaks from your code */
+    word-break: break-all;       /* Forces the long string to break at any character */
+    overflow-wrap: anywhere;     /* The strongest wrapping property available */
+    max-width: 100%;             /* Ensures it never exceeds the card width */
+    overflow: hidden;            /* Emergency cutoff if all else fails */
+    box-sizing: border-box;      /* Includes padding in width calculation */
 }
 
 @media (min-width: 640px) {
