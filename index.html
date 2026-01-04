@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Kevin Kelly's professional portfolio showcasing expertise in electrical and computer engineering, including hardware and software projects, employment history, and education.">
-    <meta name="keywords" content="Kevin Kelly, Electrical Engineer, Computer Engineer, hardware engineering, software engineering, projects, employment history, education, portfolio">
+    <meta name="description" content="Kevin Kelly's professional portfolio showcasing expertise in electrical and computer engineering.">
     <meta name="author" content="Kevin Kelly">
 
     <meta property="og:title" content="Kevin Kelly - Electrical & Computer Engineer">
@@ -13,26 +12,17 @@
     <meta property="og:image" content="https://resume.kevinwaynekelly.com/images/og-image.jpeg">
     <meta property="og:url" content="https://resume.kevinwaynekelly.com/">
     <meta property="og:type" content="website">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:site_name" content="Kevin Kelly's Portfolio">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Kevin Kelly - Electrical & Computer Engineer">
-    <meta name="twitter:description" content="Showcasing expertise in electrical and computer engineering, including hardware and software projects, employment history, and education.">
-    <meta name="twitter:image" content="https://resume.kevinwaynekelly.com/images/og-image.jpeg">
+    
+    <title>Kevin Kelly - Electrical & Computer Engineer</title>
 
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-
     <link rel="stylesheet" href="/css/site.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <title>Kevin Kelly - Electrical & Computer Engineer</title>
 </head>
 
 <body>
     <div class="code-container">
+        
         <header>
             <div>
                 <h1>Kevin Kelly</h1>
@@ -41,232 +31,285 @@
                 <button id="theme-toggle" aria-label="Toggle theme">Switch to Dark Mode</button>
             </div>
             <nav>
-                <p><a href="mailto:kevinwaynekelly@gmail.com" aria-label="Email Kevin Kelly"><i class="fas fa-envelope"></i></a></p>
-                <p><a href="https://www.linkedin.com/in/kevinwaynekelly/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></p>
-                <p><a href="/docs/Kevin_Kelly_resume.pdf" target="_blank" aria-label="Resume"><i class="fas fa-file-pdf"></i></a></p>
+                <a href="mailto:kevinwaynekelly@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/kevinwaynekelly/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="/docs/Kevin_Kelly_resume.pdf" target="_blank" aria-label="Resume PDF"><i class="fas fa-file-pdf"></i></a>
             </nav>
         </header>
+
         <main>
             <section id="professional-summary">
-                <h2><i class="fas fa-user"></i> Professional Summary</h2>
-                <p>I’m an Electrical Engineering graduate from the University of Texas at Austin with a strong background in hardware design, embedded systems, and low-level programming. I work comfortably across x86 and ARM Assembly, embedded C, Verilog, and RTL design, and I also build high-level applications using Python, Java, and modern web technologies. My project experience includes ASIC verification, PCB design, real-time image processing, and server deployment. I’m looking for roles in ASIC or RTL engineering, embedded development, or systems programming where I can tackle high-performance computing and hardware–software integration challenges.</p>
+                <h2>Professional Summary</h2>
+                <p>I’m an Electrical Engineering graduate from the University of Texas at Austin with a strong background in hardware design, embedded systems, and low-level programming. I work comfortably across x86 and ARM Assembly, embedded C, Verilog, and RTL design, and I also build high-level applications using Python, Java, and modern web technologies. My project experience includes ASIC verification, PCB design, real-time image processing, and server deployment.</p>
             </section>
             
             <section id="api-demo">
-                <h2>
-			<i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
-			<span class="sr-only">Encrypted Pipeline Demo</span>
-			Encrypted Pipeline Demo
-		  </h2>
+                <h2>Encrypted Pipeline Demo</h2>
                 <p class="sub-info">
-                    This demo utilizes a zero-trust architecture where data is encrypted in-browser using <strong>RSA-OAEP</strong>. The ciphertext is transmitted over HTTPS to a <strong>Cloudflare Worker</strong> written in TypeScript, which enforces strict <strong>origin validation</strong> and <strong>token-gated authentication</strong>. Decryption occurs at the edge using the <strong>Web Crypto API</strong> and a <strong>PKCS#8 private key</strong>, ensuring that sensitive plaintext is never exposed to the network or stored insecurely.
+                    This demo utilizes a zero-trust architecture where data is encrypted in-browser using <strong>RSA-OAEP</strong>. The ciphertext is transmitted over HTTPS to a <strong>Cloudflare Worker</strong> written in TypeScript, which enforces strict <strong>origin validation</strong> and <strong>token-gated authentication</strong>. Decryption occurs at the edge using the <strong>Web Crypto API</strong> and a <strong>PKCS#8 private key</strong>.
                 </p>
+                
                 <div class="grid">
-                    <label>
-                        <span>Your text</span>
-                        <input id="demo-text" placeholder="Type something..." />
-                    </label>
-                    <label>
-                        <span>Mode</span>
-                        <select id="demo-mode">
-                            <option value="uppercase">Uppercase</option>
-                            <option value="reverse">Reverse</option>
-                            <option value="sparkles">Sparkles ✨</option>
-                            <option value="snake">snake_case</option>
-                        </select>
-                    </label>
-                    <button id="demo-send">Send to API</button>
+                    <input id="demo-text" placeholder="Type message to encrypt..." />
+                    <select id="demo-mode">
+                        <option value="uppercase">Uppercase</option>
+                        <option value="reverse">Reverse</option>
+                        <option value="sparkles">Sparkles ✨</option>
+                        <option value="snake">snake_case</option>
+                    </select>
+                    <button id="demo-send">Execute</button>
                 </div>
                 <div class="summary-panel summary-panel--dark">
-                    <pre id="demo-summary">—</pre>
+                    <pre id="demo-summary">Waiting for input...</pre>
+                </div>
+
+                <div class="code-window">
+                    <div class="code-header">
+                        <span>src/index.ts</span>
+                        <span>TypeScript</span>
+                    </div>
+                    <div class="code-content">
+<pre><code>/**
+ * Cloudflare Worker: RSA-OAEP decrypting API, token gated
+ */
+
+export interface Env {
+  ALLOWED_ORIGIN: string;
+  PRIVATE_KEY: string;
+  CLIENT_TOKEN: string;
+}
+
+const JSON_CT = { "Content-Type": "application/json" } as const;
+const BASE_HEADERS = {
+  "Cache-Control": "no-store",
+  "X-Content-Type-Options": "nosniff",
+  "Cross-Origin-Resource-Policy": "same-site",
+} as const;
+
+function cors(allowed: string) {
+  return {
+    "Access-Control-Allow-Origin": allowed,
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, X-Client-Token",
+  };
+}
+
+async function importPrivateKey(pkcs8Pem: string): Promise&lt;CryptoKey&gt; {
+  // Convert PEM to ArrayBuffer and import via Web Crypto API
+  const pkcs8 = pemToPkcs8Bytes(pkcs8Pem);
+  return await crypto.subtle.importKey(
+    "pkcs8", pkcs8,
+    { name: "RSA-OAEP", hash: "SHA-256" },
+    false, ["decrypt"]
+  );
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise&lt;Response&gt; {
+    const allowedOrigin = env.ALLOWED_ORIGIN;
+    
+    // 1. Strict Origin Check
+    const origin = request.headers.get("Origin");
+    if (!origin || origin !== allowedOrigin) return jerr(403, allowedOrigin);
+
+    // 2. Token Gate
+    const tok = request.headers.get("X-Client-Token");
+    if (!tok || tok !== env.CLIENT_TOKEN) return jerr(401, allowedOrigin);
+
+    // 3. Decrypt Payload
+    try {
+      const payload = await request.json();
+      const key = await importPrivateKey(env.PRIVATE_KEY);
+      const ctBytes = base64urlToBytes(payload.ciphertext);
+      
+      const plainBuf = await crypto.subtle.decrypt(
+        { name: "RSA-OAEP" }, key, ctBytes
+      );
+      
+      // 4. Transform & Return
+      const plainJson = new TextDecoder().decode(plainBuf);
+      const body = JSON.parse(plainJson);
+      return new Response(JSON.stringify({ 
+        ok: true, 
+        transformed: transform(body.text, body.mode) 
+      }), {
+        headers: { ...BASE_HEADERS, ...cors(allowedOrigin), ...JSON_CT }
+      });
+    } catch (e) {
+      return jerr(400, allowedOrigin);
+    }
+  },
+} satisfies ExportedHandler&lt;Env&gt;;</code></pre>
+                    </div>
                 </div>
             </section>
 
             <section id="education">
-                <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                <h2>Education</h2>
                 <article>
                     <h3>Bachelor of Science in Electrical Engineering</h3>
-                    <p class="sub-info">The University of Texas at Austin, Austin, TX — May 2023</p>
+                    <span class="sub-info">The University of Texas at Austin — May 2023</span>
                     <ul>
-                        <li><strong>Emphasis: Software Engineering and Design</strong>, Embedded Systems, Computer Architecture.</li>
-                        <li>Built strong foundations in hardware design, embedded systems, and computer engineering.</li>
-                        <li>Applied low-level programming skills in x86 Assembly, ARM Assembly, Verilog, RTL Design.</li>
-                        <li>Gained proficiency in high-level languages including C, C++, Java, Python, JavaScript, SQL, HTML/CSS.</li>
+                        <li><strong>Emphasis: Software Engineering and Design</strong>, Embedded Systems.</li>
                         <li>Relevant Coursework: Digital Logic Design, Computer Architecture, Operating Systems, Embedded Systems, Signal Processing, Data Structures & Algorithms, Software/Requirements Engineering.</li>
                     </ul>
                 </article>
             </section>
 
             <section id="projects">
-                <h2><i class="fas fa-tasks"></i> Projects</h2>
+                <h2>Engineering Projects</h2>
 
                 <article>
                     <h3>Formal Circuit Verification Tool</h3>
-                    <p class="sub-info">Sponsored by Cadence Design Systems Inc.</p>
+                    <span class="sub-info">Sponsored by Cadence Design Systems</span>
                     <ul>
                         <li>Engineered a C++ tool utilizing Tarjan’s SCC, Eades approximation, and backtracking algorithms to detect and remove cycles in ASIC/RTL netlists.</li>
                         <li>Benchmarked and optimized algorithms to eliminate runtime bottlenecks in timing-critical verification flows.</li>
-                        <li>Prepared large RTL designs for industrial use in Cadence’s verification toolchain.</li>
                     </ul>
                 </article>
 
                 <article>
                     <h3>ARM-Based USB Game Controller</h3>
-                    <p class="sub-info">Embedded Product Design</p>
+                    <span class="sub-info">Embedded Product Design</span>
                     <ul>
                         <li>Designed a custom PCB integrating an ARM Cortex-M microcontroller, dual joysticks, and 12 buttons.</li>
                         <li>Led board bring-up and wrote bare-metal Embedded C firmware handling memory-mapped I/O and USB HID communication.</li>
-                        <li>Designed end-to-end solution from hardware schematics through embedded firmware integration.</li>
                     </ul>
                 </article>
 
                 <article>
                     <h3>Unraid Home Server Infrastructure</h3>
-                    <p class="sub-info">Systems Administration</p>
+                    <span class="sub-info">Systems Administration</span>
                     <ul>
                         <li>Maintain a production-grade Unraid server hosting CI/CD pipelines, Dockerized microservices, and automation.</li>
                         <li>Configured RAID parity and redundant storage arrays to ensure 100% data integrity and fault tolerance.</li>
-                        <li>Implemented self-hosted DNS with local caching, reverse proxies, and VPN tunneling to improve security.</li>
-                        <li>Demonstrated applied experience in container orchestration, virtualization, and sysadmin practices.</li>
+                        <li>Implemented self-hosted DNS with local caching, reverse proxies, and VPN tunneling.</li>
                     </ul>
                 </article>
 
                 <article>
                     <h3>Project Management Platform</h3>
-                    <p class="sub-info">Full Stack Development</p>
+                    <span class="sub-info">Full Stack Development</span>
                     <ul>
                         <li>Led full-stack deployment of a project management website using React, Node.js, MongoDB, Heroku, Python, and SQL.</li>
                         <li>Built REST APIs for seamless data exchange and managed complex database schemas for scalable data handling.</li>
-                        <li>Delivered a production-ready platform demonstrating full-stack engineering capabilities.</li>
                     </ul>
                 </article>
 
                 <article>
                     <h3>Real-Time Facial Expression Recognition</h3>
-                    <p class="sub-info">Computer Vision Engineering</p>
+                    <span class="sub-info">Computer Vision Engineering</span>
                     <ul>
                         <li>Built a real-time computer vision pipeline using OpenCV and Haar cascades to classify emotions in video feeds.</li>
                         <li>Mapped detected emotions (happiness, sadness, surprise) to smart home automation events via IFTTT.</li>
-                        <li>Demonstrated integration of embedded software, computer vision, and IoT systems.</li>
                     </ul>
                 </article>
 
                 <article>
                     <h3>Stakeholder System Requirements</h3>
-                    <p class="sub-info">Requirements Engineering</p>
+                    <span class="sub-info">Requirements Engineering</span>
                     <ul>
                         <li>Conducted stakeholder analysis with educators and IT professionals to capture system needs.</li>
                         <li>Defined functional and non-functional requirements for an academic AI-content detection tool.</li>
-                        <li>Outlined integration with existing learning management systems to ensure adoption.</li>
-                        <li>Produced a structured, traceable requirements document for system development.</li>
                     </ul>
                 </article>
 
                 <article>
                     <h3>Professional Portfolio Website</h3>
-                    <p class="sub-info">Personal Project</p>
+                    <span class="sub-info">Personal Project</span>
                     <ul>
-                        <li>Built and deployed a responsive portfolio site (<a href="https://resume.kevinwaynekelly.com" target="_blank">resume.kevinwaynekelly.com</a>) to showcase education, projects, and employment history.</li>
-                        <li>Implemented modern web standards: HTML5, CSS3, JavaScript, and grid/flex layouts with a fully responsive design.</li>
-                        <li>Added dark mode toggle, custom theming, OpenGraph/Twitter meta tags, and SEO optimization for professional presentation.</li>
+                        <li>Built and deployed a responsive portfolio site using modern HTML5, CSS3, and JavaScript grid layouts.</li>
                         <li>Deployed on a custom domain with HTTPS support (Cloudflare Pages), ensuring professional accessibility.</li>
                     </ul>
                 </article>
-
             </section>
             
             <section id="employment-history">
-                <h2><i class="fas fa-briefcase"></i> Employment History</h2>
+                <h2>Employment History</h2>
 
                 <article>
                     <h3>Audio Visual Operations Supervisor</h3>
-                    <p class="sub-info">The University of Texas at Austin, Austin, TX — Sep 2021 - Aug 2023</p>
+                    <span class="sub-info">UT Austin — Sep 2021 - Aug 2023</span>
                     <ul>
                         <li><strong>Operations Leadership:</strong> Directed a team of 20+ technicians, managing scheduling, workflow delegation, and performance reviews to ensure successful execution of large-scale events.</li>
                         <li><strong>Training & Standards:</strong> Developed technical training curricula for new hires, standardizing safety protocols and equipment procedures to reduce operational errors.</li>
-                        <li><strong>Infrastructure Management:</strong> Directed infrastructure upgrades and asset maintenance while serving as the primary liaison for university leadership to resolve real-time logistical escalations.</li>
+                        <li><strong>Infrastructure Management:</strong> Directed infrastructure upgrades and asset maintenance while serving as the primary liaison for university leadership.</li>
                     </ul>
                 </article>
 
                 <article>
-                    <h3>Audio Visual Operator / Technical Assistant</h3>
-                    <p class="sub-info">The University of Texas at Austin, Austin, TX — Sep 2019 - Sep 2021</p>
+                    <h3>Audio Visual Operator</h3>
+                    <span class="sub-info">UT Austin — Sep 2019 - Sep 2021</span>
                     <ul>
                         <li>Executed technical operations for high-profile events, adapting to evolving client demands and equipment constraints.</li>
                         <li>Troubleshot hardware signal flows and audio systems in real-time to maintain service continuity.</li>
-                        <li>Collaborated directly with clients to deliver professional live sound services at high-profile venues.</li>
                     </ul>
                 </article>
 
+                <article>
+                    <h3>Information Technology Intern</h3>
+                    <span class="sub-info">East Central ISD — May 2018 - Aug 2018</span>
+                    <ul>
+                        <li>Repaired and maintained laptops, desktops, and school technology equipment for district-wide use.</li>
+                        <li>Deployed and configured new hardware to support staff and student operations.</li>
+                        <li>Gained practical IT experience in troubleshooting, hardware installation, and system configuration.</li>
+                    </ul>
+                </article>
             </section>
             
             <section id="skills">
-                <h2><i class="fas fa-code"></i> Skills</h2>
-
-                <div style="
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-			gap: 20px;
-			align-items: start;
-		  ">
-
+                <h2>Technical Skills</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
                     <div>
                         <h3>Programming Languages</h3>
                         <ul>
                             <li>ARM Assembly, x86 Assembly</li>
                             <li>C, C++, C#, Java, Python</li>
-                            <li>JavaScript, SQL, Lua, HTML5, CSS</li>
+                            <li>JavaScript, SQL, Lua</li>
                         </ul>
                     </div>
-
                     <div>
                         <h3>Hardware / Systems</h3>
                         <ul>
-                            <li>Verilog, RTL Design, Digital Logic</li>
-                            <li>FPGA/ASIC Verification, PCB Design</li>
-                            <li>SoC Integration, Embedded Systems</li>
-                            <li>System Architecture, Linux, Docker</li>
+                            <li>Verilog, RTL Design</li>
+                            <li>FPGA/ASIC Verification</li>
+                            <li>SoC Integration, PCB Design</li>
+                            <li>Linux, Docker, Virtualization</li>
                         </ul>
                     </div>
-
                     <div>
                         <h3>Cloud & DevOps</h3>
                         <ul>
-                            <li>AWS, Cloudflare Workers, CI/CD</li>
-                            <li>NGINX, TCP/IP, DNS, SSL/TLS</li>
-                            <li>VPN, Virtualization</li>
+                            <li>AWS, Cloudflare Workers</li>
+                            <li>CI/CD, NGINX, TCP/IP</li>
+                            <li>DNS, SSL/TLS, VPN</li>
                         </ul>
                     </div>
-
                     <div>
-                        <h3>Frameworks / Tools</h3>
+                        <h3>Tools</h3>
                         <ul>
-                            <li>React.js, Node.js, OpenCV, Git</li>
-                            <li>MongoDB, PostgreSQL, Redis</li>
-                            <li>MATLAB, Jira, Unit Testing</li>
+                            <li>React.js, Node.js, Git</li>
+                            <li>MongoDB, PostgreSQL</li>
+                            <li>MATLAB, Jira</li>
                         </ul>
                     </div>
-
                 </div>
             </section>
 
             <section id="references">
-                <h2><i class="fas fa-address-book"></i> References</h2>
-                <p>The following are references who can attest to my professional qualifications and work experience:</p>
+                <h2>References</h2>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div class="reference-item">
                         <h3>Barry Alvear</h3>
                         <p><strong>Position:</strong> Technical Coordinator</p>
                         <p><strong>Company:</strong> The University of Texas at Austin</p>
-                        <p><strong>Email:</strong> Available upon request.</p>
-                        <p><strong>Phone:</strong> Available upon request.</p>
+                        <p><strong>Contact:</strong> Available upon request.</p>
                     </div>
                     <div class="reference-item">
                         <h3>Oscar Sanchez</h3>
                         <p><strong>Position:</strong> Technical Services Manager</p>
                         <p><strong>Company:</strong> The University of Texas at Austin</p>
-                        <p><strong>Email:</strong> Available upon request.</p>
-                        <p><strong>Phone:</strong> Available upon request.</p>
+                        <p><strong>Contact:</strong> Available upon request.</p>
                     </div>
                 </div>
             </section>
@@ -280,5 +323,4 @@
     <script src="/js/theme-footer.js"></script>
     <script src="/js/api-demo.js"></script>
 </body>
-
 </html>
