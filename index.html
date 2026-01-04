@@ -59,7 +59,7 @@
 			Encrypted Pipeline Demo
 		  </h2>
                 <p class="sub-info">
-                    Data is encrypted in the browser using RSA-OAEP. It’s sent over HTTPS to a Cloudflare Pages Function, which adds signed headers and checks the request’s origin. The encrypted data is then passed to a Cloudflare Worker, where it's decrypted using a private key. This setup ensures end-to-end confidentiality, data integrity, and trust limited to the domain.
+                    This demo utilizes a zero-trust architecture where data is encrypted in-browser using <strong>RSA-OAEP</strong>. The ciphertext is transmitted over HTTPS to a <strong>Cloudflare Worker</strong> written in TypeScript, which enforces strict <strong>origin validation</strong> and <strong>token-gated authentication</strong>. Decryption occurs at the edge using the <strong>Web Crypto API</strong> and a <strong>PKCS#8 private key</strong>, ensuring that sensitive plaintext is never exposed to the network or stored insecurely.
                 </p>
                 <div class="grid">
                     <label>
